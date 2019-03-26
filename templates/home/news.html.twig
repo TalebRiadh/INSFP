@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/img/favicon.png" type="image/png" />
+    <title>Blog Details</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/flaticon.css" />
+    <link rel="stylesheet" href="/css/themify-icons.css" />
+    <link rel="stylesheet" href="/vendors/owl-carousel/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/vendors/nice-select/css/nice-select.css" />
+    <!-- main css -->
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body>
+    
+            <!--================ Start Header Menu Area =================-->
+            <header class="header_area">
+                <div class="main_menu">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <div
+                            class="container">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <a class="navbar-brand logo_h" href="{{path('home')}}">
+                                <img id="imageid" alt="" src="/img/logo3.png"/>
+                            </a>
+                            
+                            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                                <ul class="nav navbar-nav menu_nav ml-auto">
+                                    <li  class="nav-item active">
+                                        <a class="nav-link" href="index.html">ACCUEIL</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="about-us.html">À PROPOS DE NOUS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="courses.html">COURS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="blog.html">EVENEMENTS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="contact.html">CONTACT</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <!--================ End Header Menu Area =================-->
+
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="banner_content text-center">
+                <h2>Details</h2>
+                <div class="page_link">
+                  <a href="index.html">ACCUEIL</a>
+                  <a href="blog.html">EVENEMENTS</a>
+                  <a href="single-blog.html">{{ news.titre}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+    <!--================Blog Area =================-->
+    <section class="blog_area single-post-area section_gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 posts-list">
+                    <div class="single-post row">
+                        <div class="col-lg-12">
+                            <div class="feature-img">
+                        <img class="img-fluid" src="{{asset('news/pdf/')}}{{first|first}}" alt="" onclick="window.open(this.src)"
+ />
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3  col-md-3">
+                            <div class="blog_info text-right">
+                                <ul class="blog_meta list">
+                                    <li><a href="#">{{news.getDateDeEvenement|date('Y-m-d ')}}<i class="ti-calendar"></i></a></li>
+                                    <li><a href="#">SBA<i class="ti-flag-alt"></i></a></li>
+                                    <li><a href="#">999<i class="ti-eye"></i></a></li>
+                                </ul>
+                                <ul class="social-links">
+                                    <li><a href="#"><i class="ti-facebook"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 blog_details">
+                            <h2>{{ news.titre}}</h2>
+                            <p class="excert">
+                               {{ news.discription }}
+                            </p>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                            {% for result in results %}
+                                            
+                                    {% for image in result %}
+                                    {% for extension in extension %}
+                    {% if extension=="pdf" %}
+                    <a href="{{asset('news/pdf/')}}{{image}}" class="btn btn-info" ><i class="fas fa-eye"
+                            style="padding-right:5px;"></i>Voir</a>
+                                        {% endif %}
+                {% endfor %}
+                                <div class="col-6">
+                                    <img class="img-fluid" src="{{asset('news/pdf/')}}{{image}}" alt="" onclick="window.open(this.src)" />
+                                </div>
+                                {% endfor %}
+                            {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="col-lg-4">
+                        <div class="blog_right_sidebar">
+                              <aside class="single_sidebar_widget post_category_widget">
+                            <h4 class="widget_title">Menu</h4>
+                            <ul class="list cat-list">
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>ACCUEIL </p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>PRESENTATION </p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p> AGENDA </p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>ALBUM PHOTO</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>CONTACT</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>SERVICE EN LIGNE</p>
+                                    </a>
+                                </li>
+                            
+                        </aside>
+                       
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+    <!--================Blog Area =================-->
+
+   <!--================ Start footer Area  =================-->
+            <footer class="footer-area section_gap">
+                <div class="container">
+                    <div class="row">
+                         <div class="col-lg-6 col-md-6 single-footer-widget">
+                                                         <img alt="" src="/img/logo3.png"/>
+
+                        </div>
+                        <div class="col-lg-2 col-md-6 single-footer-widget">
+                            <h4>Menu</h4>
+                            <ul>
+                                <li><a href="#">Accuil</a></li>
+                                <li><a href="#">À propos de nous</a></li>
+                                <li><a href="#">Cours</a></li>
+                                <li><a href="#">Evenements</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                        
+                        
+                        
+                       
+                    </div>
+                    <div class="row footer-bottom d-flex justify-content-between">
+                        <p
+                            class="test col-lg-8 col-sm-12 footer-text m-0 text-white">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            All rights reserved | This template is made with
+                            <i aria-hidden="true" class="ti-heart"></i>
+                            by
+                            <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                        <div class="col-lg-4 col-sm-12 footer-social">
+                            <a href="#">
+                                <i class="ti-facebook"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!--================ End footer Area  =================-->
+      
+          <!-- Optional JavaScript -->
+          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+          <script src="/js/jquery-3.2.1.min.js"></script>
+          <script src="/js/popper.js"></script>
+          <script src="/js/bootstrap.min.js"></script>
+          <script src="/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+          <script src="/vendors/owl-carousel/owl.carousel.min.js"></script>
+          <script src="js/owl-carousel-thumb.min.js"></script>
+          <script src="/js/jquery.ajaxchimp.min.js"></script>
+          <script src="/js/mail-script.js"></script>
+          <!--gmaps Js-->
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+          <script src="/js/gmaps.min.js"></script>
+          <script src="/js/theme.js"></script>
+        </body>
+      </html>

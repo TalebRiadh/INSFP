@@ -1,0 +1,18 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <h2 style="margin-bottom:80px;">
+        <i class="fas fa-newspaper fa-2x" style="padding-right:5px;"></i>  editer une nouvelle 
+    </h2>                
+    {% for result in results %}
+                {% for extension in extension %}
+                    {% if extension=="png" or extension=="jpg"   %}
+                    <img src="{{asset('news/pdf/')}}{{result}}" alt="test" style="width:550px ; height: 380px" />
+                    {% endif %}
+                {% endfor %}
+             <br>
+    {% endfor %}
+</div>
+{% endblock %}

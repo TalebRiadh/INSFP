@@ -1,0 +1,24 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        fichier_pdf:
+            uri_prefix: /fichiers
+            upload_destination: '%kernel.project_dir%/public/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+        News_image:
+            uri_prefix: /news/images
+            upload_destination: '%kernel.project_dir%/public/news/images'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+        photo:
+            uri_prefix: /Gallery
+            upload_destination: '%kernel.project_dir%/public/Gallery'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer      
+        News_fichier:
+            uri_prefix: /news/fichiers
+            upload_destination: '%kernel.project_dir%/public/news/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer  
+    #mappings:
+    #    products:
+    #        uri_prefix: /images/products
+    #        upload_destination: '%kernel.project_dir%/public/images/products'

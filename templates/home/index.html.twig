@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+        <link href="/img/favicon.png" rel="icon" type="image/png"/>
+        <title>INSFP</title>
+        <link
+            crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" rel="stylesheet">
+            <!-- Bootstrap CSS -->
+            <link href="/css/bootstrap.css" rel="stylesheet"/>
+            <link href="/css/flaticon.css" rel="stylesheet"/>
+            <link href="/css/themify-icons.css" rel="stylesheet"/>
+            <link href="/vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet"/>
+            <link
+            href="/vendors/nice-select/css/nice-select.css" rel="stylesheet"/>
+            <!-- main css -->
+            <link href="/css/style.css" rel="stylesheet"/>
+        </head>
+        <body>
+
+            <!--================ Start Header Menu Area =================-->
+            <header class="header_area">
+                <div class="main_menu">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <div
+                            class="container">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <a class="navbar-brand logo_h" href="index.html">
+                                <img id="imageid" alt="" src="img/logo3.png"/>
+                            </a>
+                            
+                            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                                <ul class="nav navbar-nav menu_nav ml-auto">
+                                    <li  class="nav-item active">
+                                        <a class="nav-link" href="index.html">ACCUEIL</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="about-us.html">À PROPOS DE NOUS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{path('fichiers.show')}}">COURS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="blog.html">EVENEMENTS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="contact.html">CONTACT</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <!--================ End Header Menu Area =================-->
+            <!--================ Start Home Banner Area =================-->
+            <section class="home_banner_area">
+                <div class="banner_inner">
+                   <div class="container" style="margin-top: 15%;" >
+                <div class="row">
+                    <div id="events" class="col-lg-8 col-s-12 col-xs-12">
+                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                      <ol class="carousel-indicators" style="bottom: 35px;">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        
+                      </ol>
+                            
+                      <div class="carousel-inner">
+                        
+                        {% for event in events %}
+                        <div class="carousel-item ">
+                             <div class="single_event position-relative">
+                                <div class="event_thumb">
+                                    <img class="d-block w-100" alt="" src="img/b.jpg"/>
+                                </div>
+                                <div class="event_details">
+                                    <div class="d-flex mb-4">
+                                        <div class="date">
+                                            <span>  
+                                            {{event.getDateDeEvenement|date('d')}}
+                                            </span>
+                                            <span class="month" id="month">{{event.getDateDeEvenement|date('m')}}</span>
+
+</div>
+                                        <div class="time-location">
+                                            <p>
+                                                <span class="ti-time mr-2"></span>
+                                                {{event.start|date('H:i')}}
+                                                {{event.end|date('H:i')}}
+
+                                            </p>
+                                            <p>
+                                                <span class="ti-location-pin mr-2"></span>
+                                                IPSTF
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        {{ event.titre }}
+                                    </p>
+                                    <a class="primary-btn rounded-0 mt-3" href="{{ path('evenement.show',{slug:event.slug ,id:event.id}) }}">Voir les details</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span  style="opacity: 0.1" class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span style="opacity: 0.1" class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span  style="opacity: 0.1" class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span style="opacity: 0.1" class="sr-only">Next</span>
+                      </a>
+                    </div>
+                       </div>
+                    <div class="col-lg-4 "  style="background-color:#F1F9FF;padding: 15px;">
+                          <aside class="single_sidebar_widget popular_post_widget">
+                            <h2 class="widget_title" style="margin-bottom: 40px;margin-top: 20px; " >Les derniers nouvelles</h2>
+                            {% for new in news %}
+                            <div class="media post_item">
+                                <div class="media-body">
+                                    <a id="news" href="{{ path('news.show',{slug:new.slug ,id:new.id}) }}">
+                                        <h5>{{new.titre }}                 
+                                        <br>    
+                                        <small><time datetime="{{ new.created|date('Y-m-d H:i') }}">Should be replaced</time></small>
+
+                                        </h5>
+                                    </a>
+                                </div>
+                            </div><br>
+                            {% endfor %}
+
+                           
+                            <div class="br"></div>
+                        </aside>
+                    
+                    </div>
+                  </div>
+                <div class="row" style="margin-top: 10px; ">
+
+                    <ul class="col-lg-12" style="  list-style-type: none;
+                                      margin: 0;
+                                      padding: 0;
+                                      overflow: hidden;
+                                      background-color: #002347;">
+                        <li  class="col-lg-2" id="list" style=" float: left;">
+                            <a class="justify-content-between d-flex" style="  display: block;
+                                          color: white;
+                                          text-align: center;
+                                          padding: 16px;
+                                          text-decoration: none;" href="#">
+                                <p style="text-align: center;margin: 0 auto;"><i class="far fa-calendar-alt" style="padding-right: 1px;"></i> ancien<br>2018-10-13</p>
+                            </a>
+                        </li>
+                        <li  class="col-lg-2" id="list"  style="  float: left;">
+                            <a class="justify-content-between d-flex" style="  display: block;
+                                      color: white;
+                                      text-align: center;
+                                      padding: 16px;
+                                      text-decoration: none;" href="#">
+                                <p style="text-align: center;margin: 0 auto;"> <i class="far fa-calendar-alt" style="padding-right: 1px;"></i>ancien<br>2018-10-13 </p>
+                            </a>
+                        </li >
+                        <li class="col-lg-2" id="list" style="  float: left;">
+                            <a class="justify-content-between d-flex" style="  display: block;
+                                      color: white;
+                                      text-align: center;
+                                      padding: 16px;
+                                      text-decoration: none;" href="#">
+                                <p style="text-align: center;margin: 0 auto;" ><i class="far fa-calendar-alt" style="padding-right: 1px;"></i> ancien<br>2018-10-13 </p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2" id="list" style="  float: left;">
+                            <a class="justify-content-between d-flex" style="  display: block;
+                                      color: white;
+                                      
+                                      text-align: center;
+                                      padding: 16px;
+                                      text-decoration: none;" href="#">
+                                <p style="text-align: center;margin: 0 auto;"> <i class="far fa-calendar-alt" style="padding-right: 1px;"></i> ancien<br>2018-10-13 </p>
+                            </a>
+                        </li>
+                         <li class="col-lg-2" id="list" style="  float: left;">
+                            <a class="justify-content-between d-flex" style="  display: block;
+                                      color: white;
+                                      
+                                      text-align: center;
+                                      padding: 16px;
+                                      text-decoration: none;" href="#">
+                                <p style="text-align: center;margin: 0 auto;"><i class="far fa-calendar-alt" style="padding-right: 1px;"></i> ancien<br>2018-10-13 </p>
+                            </a>
+                        </li>
+                         <li class="col-lg-2" id="list" style="  float: left;">
+                            <a class="justify-content-between d-flex" style="  display: block;
+                                      color: white;
+                                      
+                                      text-align: center;
+                                      padding: 16px;
+                                      text-decoration: none;" href="#">
+                                <p style="text-align: center;margin: 0 auto;"><i class="far fa-calendar-alt" style="padding-right: 1px;"></i> ancien<br>2018-10-13 </p>
+                            </a>
+                        </li>
+                    </ul>
+                      
+                </div>
+                  </div>
+   </div>
+
+            </section>
+            <!--================ End Home Banner Area =================-->
+              <!--================Blog Area =================-->
+    <section class="blog_area section_gap">
+            <div class="row">
+               
+                <div class="col-lg-8" style="margin-left: 4%">
+                        <div class="container">
+                                    <div class="row justify-content-center">
+                                <div class="col-lg-5">
+                                    <div class="main_title">
+                                        <h2 class="mb-3">Caractéristique géniale</h2>
+                                        <p>
+                                            notre services sur ce site web
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="single_feature">
+                                        <div class="icon">
+                                <i class="fas fa-archway fa-2x"></i>            
+                                                        </div>
+                                        <div class="desc">
+                                            <h4 class="mt-3 mb-2">Tout sur l'institut</h4>
+                                            <p>
+                                    Les nouveautées, les cours, les evenements ...
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="single_feature">
+                                        <div class="icon">
+                                    <i class="fas fa-book fa-2x"></i>                                </div>
+                                        <div class="desc">
+                                            <h4 class="mt-3 mb-2">Cours</h4>
+                                            <p>
+                                                tout les besoins concernant les étudiants                               
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="single_feature">
+                                        <div class="icon">
+                        <i class="fas fa-question-circle fa-2x"></i>          
+                                                 </div>
+                                <div class="desc">
+                                    <h4 class="mt-3 mb-2">Contact avec l'equipe</h4>
+                                    <p>
+                            on est ici pour vous aider et repondre a vos questions
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+                </div>
+                <div class="col-lg-3" >
+                   <div class="container">
+                    <div class="blog_right_sidebar">
+
+                        <aside class="single_sidebar_widget post_category_widget">
+                            <h4 class="widget_title">Menu</h4>
+                            <ul class="list cat-list">
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>ACCUEIL </p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>PRESENTATION </p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p> AGENDA </p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>ALBUM PHOTO</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>CONTACT</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>SERVICE EN LIGNE</p>
+                                    </a>
+                                </li>
+                            
+                        </aside>
+                       
+                    </div>
+                
+                </div>
+                </div>
+            </div>
+    </section>
+    <!--================Blog Area =================-->
+            <!--================ Start Popular Courses Area =================-->
+            <div class="popular_courses">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="main_title">
+                                <h2 class="mb-3">Les derniers Cours</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row">
+                        <!-- single course -->
+                        <div class="col-lg-12">
+                            <div class="owl-carousel active_course">
+                                {% for fichier in fichiers %}
+                                <div class="single_course">
+                                    <div class="course_head">
+                                        <img alt="" class="img-fluid" src="img/courses/c1.jpg"/>
+                                    </div>
+                                    <div class="course_content">
+                                        <span class="tag mb-4 d-inline-block">{{fichier.onPrePersist()|date('y-m-d')}}</span>
+                                        
+                                        <h4 class="mb-3">
+                                            <a href="#">{{ fichier.titre}}</a>
+                                        </h4>
+                                         <small class="mb-3">
+                                            Spécialité: {% if fichier.specialite == 0 %}
+                    Informatique
+                    {% elseif fichier.specialite == 1 %}
+                    Genie Logiciel
+                    {% else %}
+                    Systeme d'exploitation
+                    {% endif %} 
+                    <br>Module: {{ fichier.module }}
+                    <br> Céer par: {{fichier.getCreatedBy()}}
+                    </small>
+                                        <div class="course_meta d-flex justify-content-lg-between align-items-lg-center flex-lg-row flex-column mt-4">
+                                           <a href="{{ vich_uploader_asset(fichier,'pdfFile')  }}" class="btn btn-info btn-sm"><i class="fas fa-eye"
+                            style="padding-right:5px;"></i>Voir</a>
+                             <a class="btn btn-success btn-sm" href="{{ vich_uploader_asset(fichier,'pdfFile')}}" download>
+                                <i class="fas fa-download"></i> <span>Telecharger</span>
+ </a>
+                                        </div>
+                                         
+                                    </div>
+                                     
+                                     
+                                </div>
+{% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--================ End Popular Courses Area =================-->
+            <!--================ Start Events Area =================-->
+            <div class="events_area">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="main_title">
+                                <h2 class="mb-3 text-white">Evènements à venir</h2>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="single_event position-relative">
+                                <div class="event_thumb">
+                                    <img alt="" src="img/event/e1.jpg"/>
+                                </div>
+                                <div class="event_details">
+                                    <div class="d-flex mb-4">
+                                        <div class="date">
+                                            <span>15</span>
+                                            Juin</div>
+                                        <div class="time-location">
+                                            <p>
+                                                <span class="ti-time mr-2"></span>
+                                                14:00-16:30
+                                            </p>
+                                            <p>
+                                                <span class="ti-location-pin mr-2"></span>
+                                                IPSTF
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        Introduction
+                                    </p>
+                                    <a class="primary-btn rounded-0 mt-3" href="#">Voir les details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="single_event position-relative">
+                                <div class="event_thumb">
+                                    <img alt="" src="img/event/e2.jpg"/>
+                                </div>
+                                <div class="event_details">
+                                    <div class="d-flex mb-4">
+                                        <div class="date">
+                                            <span>22</span>
+                                            Mai</div>
+                                        <div class="time-location">
+                                            <p>
+                                                <span class="ti-time mr-2"></span>
+                                                9:00-12:00
+                                            </p>
+                                            <p>
+                                                <span class="ti-location-pin mr-2"></span>
+                                                SBA
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p>
+                                       Introduction
+                                    </p>
+                                    <a class="primary-btn rounded-0 mt-3" href="#">Voir les details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="text-center pt-lg-5 pt-3">
+                                <a class="event-link" href="#">
+                                    Voir tout les evenements
+                                    <img alt="" src="img/next.png"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--================ End Events Area =================-->
+            <!--================ Start Testimonial Area =================-->
+            <div class="testimonial_area section_gap">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="main_title">
+                                <h2 class="mb-3">Nos Partenaires</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="testi_slider owl-carousel">
+                            <div class="testi_item">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6">
+                                        <img alt="" src="img/partenaires/t1.jpg"/>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="testi_text">
+                                            <h4>Condor</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testi_item">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6">
+                                        <img alt="" src="img/partenaires/t2.jpg"/>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="testi_text">
+                                            <h4>Ooredoo</h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testi_item">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6">
+                                        <img alt="" src="img/partenaires/t1.jpg"/>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="testi_text">
+                                            <h4>Condor</h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testi_item">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6">
+                                        <img alt="" src="img/partenaires/t2.jpg"/>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="testi_text">
+                                            <h4>Ooredoo</h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testi_item">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6">
+                                        <img alt="" src="img/partenaires/t1.jpg"/>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="testi_text">
+                                            <h4>Condor</h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testi_item">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6">
+                                        <img alt="" src="img/partenaires/t2.jpg"/>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="testi_text">
+                                            <h4>Ooredoo</h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--================ End Testimonial Area =================-->
+            <!--================ Start footer Area  =================-->
+            <footer class="footer-area section_gap">
+                <div class="container">
+                    <div class="row">
+                         <div class="col-lg-6 col-md-6 single-footer-widget">
+                                                         <img alt="" src="/img/logo3.png"/>
+
+                        </div>
+                        <div class="col-lg-2 col-md-6 single-footer-widget">
+                            <h4>Menu</h4>
+                            <ul>
+                                <li><a href="#">Accuil</a></li>
+                                <li><a href="#">À propos de nous</a></li>
+                                <li><a href="#">Cours</a></li>
+                                <li><a href="#">Evenements</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                        
+                        
+                        
+                       
+                    </div>
+                    <div class="row footer-bottom d-flex justify-content-between">
+                        <p
+                            class="test col-lg-8 col-sm-12 footer-text m-0 text-white">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            All rights reserved | This template is made with
+                            <i aria-hidden="true" class="ti-heart"></i>
+                            by
+                            <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                        <div class="col-lg-4 col-sm-12 footer-social">
+                            <a href="#">
+                                <i class="ti-facebook"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!--================ End footer Area  =================-->
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="/js/jquery-3.2.1.min.js"> </script>
+            <script src="/js/popper.js"></script>
+            <script src="/js/bootstrap.min.js"></script>
+            <script src="/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+            <script src="/vendors/owl-carousel/owl.carousel.min.js"></script>
+            <script src="/js/owl-carousel-thumb.min.js"></script>
+            <script src="/js/jquery.ajaxchimp.min.js"></script>
+            <script src="/js/mail-script.js"></script>
+            <!--gmaps Js-->
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+            <script src="/js/gmaps.min.js"></script>
+            <script src="/js/theme.js"></script>
+        </body>
+    </html>

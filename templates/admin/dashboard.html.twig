@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('build/js/app.css')}}">
+    {% endblock %}
+</head>
+
+
+<body>
+
+    <div class="row">
+        <div class="col-lg-1 col-md-3 col-sm-3 col-xs-3 ">
+            <div class="list-group ">
+            <img src="{{asset('images/logo_d.png')}}" id="logo_d">
+                <a href="{{path('admin.user.index')}}" class="list-group-item {% if current==1 %}active{% endif %}  text-center">
+                    <i class="fas fa-users fa-2x"></i><br/>Memebres
+                </a>
+                <a href="{{path('admin.user.new')}}" class="list-group-item {% if current==2 %}active{% endif %} text-center">
+                    <i class="fas fa-user-plus fa-2x"></i><br/>Ajouter un membre
+                </a>
+                <a href="{{path('show_fichier')}}" class="list-group-item text-center {% if current==3 %}active{% endif %}">
+                    <i class="fas fa-file-alt fa-2x"></i><br/>Gestion des Fichiers
+                </a>
+                <a href="{{path('admin.news.index')}}" class="list-group-item text-center  {% if current==4 %}active{% endif %}">
+                    <i class="far fa-newspaper fa-2x"></i> <br/>News
+                </a>
+                <a href="{{path('admin.evenement.index')}}" class="list-group-item text-center {% if current==5 %}active{% endif %}">
+                    <i class="fas fa-clipboard-list fa-2x"></i><br/>Evenements
+                </a>
+                <a href="#" class="list-group-item text-center {% if current==6 %}active{% endif %}">
+                    <i class="fas fa-images fa-2x"></i><br/>Gallery
+                </a>
+                <a href="#" class="list-group-item text-center">
+                    <i class="fas fa-envelope fa-2x"></i><br/>Messages
+                </a>
+                <a href="#" class="list-group-item text-center">
+                    <i class="fas fa-chart-pie fa-2x"></i><br/>Statistiques
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-11 col-md-9 col-sm-9 col-xs-9  " id="container_dashboard">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    {% block javascripts %}
+    {{ encore_entry_script_tags('js/main') }}
+  
+    <script lang="javascript" type="text/javascript">
+        var $collectionHolder;
+        // setup an "add a tag" link
+        var $addTagLink = $('<a href="#" class="add_tag_link">Ajouter un fichier </a>');
+        var $newLinkLi = $('<li></li>').append($addTagLink);
+  
+ $('.custom-file-input').on('change', function() { 
+   let fileName = $(this).val().split('\\').pop(); 
+   $(this).next('.custom-file-label').addClass("selected").html(fileName); 
+});
+        jQuery(document).ready(function () {
+        $("legend").hide();
+
+            // Get the ul that holds the collection of tags
+            $collectionHolder = $('ul.files');
+            // add the "add a tag" anchor and li to the tags ul
+            $collectionHolder.append($newLinkLi);
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+            $addTagLink.on('click', function (e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+                // add a new tag form (see next code block)
+                addTagForm($collectionHolder, $newLinkLi);
+            });
+        });
+
+        function addTagForm($collectionHolder, $newLinkLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+            // get the new index
+            var index = $collectionHolder.data('index');
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__/g, index);
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+    </script>
+    
+    {% endblock %}
+
+</body>
+
+</html>

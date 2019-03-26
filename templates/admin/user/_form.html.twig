@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    {{ form_start(form) }}
+    <div class="form-group">
+        <div class="row">
+            <div class=" col col-md-6 col-xs-12 col-s-12">
+                {{ form_row(form.nom,{'label':'Nom'}) }}
+            </div>
+            <div class=" col col-md-6 col-xs-12 col-s-12">
+                {{ form_row(form.prenom,{'label':'Prénom'}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col col-md-8 col-xs-12 col-s-12">
+                {{ form_row(form.email,{'label':'Email'}) }}
+            </div>
+            <div class=" col col-md-4 col-xs-12 col-s-12">
+                {{ form_row(form.tel_num,{'label':'Numéro de téléphone'}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col col-md-6 col-xs-12 col-s-12">
+                {{ form_row(form.password,{'label':'Mot de passe'}) }}
+            </div>
+            <div class=" col col-md-6 col-xs-12 col-s-12">
+                {{ form_row(form.confirm_password,{'label':'Confirmer le Mot de passe'}) }}
+            </div>
+            <div class=" col col-md-6 col-xs-12 col-s-12">
+                {{ form_row(form.role,{'label':'Role'}) }}
+            </div>
+        </div>
+
+        {{ form_rest(form) }}
+
+        <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
+        {{ form_end(form) }}
+    </div>

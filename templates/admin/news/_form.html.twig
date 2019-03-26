@@ -1,0 +1,15 @@
+<div class="container mt-15">
+            {{ form_start(form)}}
+        {{ form_row(form.titre) }}
+        {{ form_row(form.discription) }}
+        <ul class="files" data-prototype="{{ form_widget(form.files.vars.prototype)|e('html_attr') }}">
+            {% for element in form.files %}
+            <li>
+                {{ form_widget(element.file) }}
+            </li>
+            {% endfor %}
+        </ul>
+        {{ form_rest(form) }}
+        <button class="btn btn-primary"><i class="fas fa-upload" style="padding-right:10px;"></i>{{ button|default('Enregistrer') }}</button>
+        {{ form_end(form) }}
+    </div>

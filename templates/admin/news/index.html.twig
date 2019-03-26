@@ -1,0 +1,61 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title 'Gerer les News' %}
+{% block body %}
+<div class="container-fluid row ">
+    <div class="col-md-4">
+        <h1 class="center-align  "><i class="fas fa-newspaper"></i> Gérer les News </h1>
+    </div>
+</div>
+ {% for message in app.flashes('success') %}
+    <div class="alert alert-success"id="successMessage">{{ message }}</div>
+    {% endfor %}
+<div >
+    <a href="{{ path('admin.news.new') }}" class="btn btn-primary mb-3"><i class="fas fa-plus" style="padding-right:10px;"></i>Créer
+        une News</a>
+
+
+    <table class="table table-striped" >
+        <thead>
+            <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Discription</th>
+                <th scope="col">Date de creation</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for news in news %}
+            <tr>
+                <td>{{ news.titre }}</td>
+                <td>{{ news.discription }}</td>
+                                <td>{{ news.created|date('Y-m-d H:i:s') }}</td>
+                                <td>
+                    <a href="{{ path('admin.news.edit',{id: news.id}) }}" class="btn btn-info"><i class="fas fa-edit"
+                            style="padding-right:5px;"></i>
+                        Editer</a>
+                    <form method="post" action="{{ path('admin.news.delete',{id: news.id}) }}" style="display: inline-block"
+                        onsubmit="return confirm('Etes vou vraiment sur ?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete'~news.id) }}">
+                        <button class="btn btn-danger"><i class="fas fa-trash-alt" style="padding-right:5px;"></i>
+                            Supprimer</button>
+                    </form>
+                </td>
+
+
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <div class="navigation center-cols center-align">
+        {{ knp_pagination_render(news) }}
+    </div>
+</div>
+
+
+
+
+{% endblock body %}
