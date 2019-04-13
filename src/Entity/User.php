@@ -177,6 +177,7 @@ class User implements UserInterface, \Serializable
 
     public function getSalt()
     {
+          return '';
     }
 
     public function eraseCredentials()

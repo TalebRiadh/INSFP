@@ -52,12 +52,21 @@ class FichierController extends AbstractController
         $search = new FichierSearch();
         $form = $this->createForm(FichierSearchType::class, $search);
         $form->handleRequest($request);
-
-        $fichier = $paginator->paginate(
+        dump($user = $this->getUser());
+        if($user->getRole() == 0){
+                 $fichier = $paginator->paginate(
             $this->repository->findAllVisibleQuery($search),  /* query NOT result */
             $request->query->getInt('page', 1)  /*page number*/,
             12  /*limit per page*/
-        );
+             );
+        }else{
+                 $fichier = $paginator->paginate(
+            $this->repository->findAllVisibleQuerybyprof($search,$user->getNom()),  /* query NOT result */
+            $request->query->getInt('page', 1)  /*page number*/,
+            12  /*limit per page*/
+             );
+        }
+      
 
         return $this->render('Admin/fichier/index.html.twig', [
             'fichier' => $fichier,

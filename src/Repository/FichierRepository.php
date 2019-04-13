@@ -85,4 +85,24 @@ class FichierRepository extends ServiceEntityRepository
         return $query->getQuery();
     }
 
+    
+    /**
+     * @return Query
+     */
+    public function findAllVisibleQuerybyprof(FichierSearch $search,String $nom) : Query
+    {
+        $query = $this->createQueryBuilder('p');
+        $query = $query->andwhere(' p.nom like :nom')
+                        ->setParameter('nom', $nom );
+        if ($search->getModule()) {
+            $query = $query->andwhere(' p.module like :module')
+                ->setParameter('module', $search->getModule() . '%');
+        }
+        if ($search->getSpecialite()) {
+            $query = $query->andwhere(' p.specialite like  :specialite')
+                ->setParameter('specialite', $search->getSpecialite() . '%');
+        }
+        return $query->getQuery();
+    }
+
 }

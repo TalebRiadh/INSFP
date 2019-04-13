@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
 
     <title>{% block title %}{% endblock %}</title>
+                <link href=" {{asset('css/tagsinput.css')}}" rel="stylesheet"/>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
@@ -49,6 +51,9 @@
                 <a href="#" class="list-group-item text-center">
                     <i class="fas fa-chart-pie fa-2x"></i><br/>Statistiques
                 </a>
+                <a href="#" class="list-group-item text-center">
+                    <i class="fas fa-cog fa-2x"></i><br/>Option
+                </a>
             </div>
         </div>
         <div class="col-lg-11 col-md-9 col-sm-9 col-xs-9  " id="container_dashboard">
@@ -56,6 +61,7 @@
         </div>
     </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="{{asset('js/tagsinput.js')}}"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>

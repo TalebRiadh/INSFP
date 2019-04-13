@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,13 +70,15 @@ class UserController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function new(Request $request)
+    public function new(Request $request,UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->onPrePersist();
+            $user->setPassword($hash);
             $this->em->persist($user);
             $this->em->flush();
             $this->addFlash('success', 'bien créé avec succés');
@@ -105,7 +108,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
             $this->addFlash('success', 'bien modifié avec succés');
-            return $this->redirectToRoute('admin.livre.index');
+            return $this->redirectToRoute('admin.user.index');
         }
 
         return $this->render('admin/user/edit.html.twig', [
