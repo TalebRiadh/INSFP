@@ -1,0 +1,64 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title 'Gerer les images' %}
+{% block body %}
+<div class="row">
+    <div class="col-md-4">
+        <h1 class="center-align  "><i class="fas fa-images"></i> Gérer le Gallery </h1>
+    </div>
+</div>
+ {% for message in app.flashes('success') %}
+    <div class="alert alert-success"id="successMessage">{{ message }}</div>
+    {% endfor %}
+
+<div class="container-fluid " >
+   
+    <a href="{{ path('add_image') }}" class="btn btn-primary mb-3"><i class="fas fa-image" style="padding-right:10px;"></i>Ajouter une photo</a>
+    <table class="table table-striped" >
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Image</th>       
+                <th>Date-de-publication</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for gallery in gallery %}
+            <tr>
+                <td>{{ gallery.titre }}</td>
+<td>
+<div class="easyzoom">
+    <img src="{{ vich_uploader_asset(gallery,'photo') }}" alt="" style="width:110px ; height: 80px">
+</div>
+</td>                               
+ <td>{{ gallery.created|date('Y-m-d H:i') }}</td>
+
+ <td>
+                    <a href="{{ vich_uploader_asset(gallery,'photo')  }}" class="btn btn-info"><i class="fas fa-eye"
+                            style="padding-right:5px;"></i>Voir</a>
+                    <form method="post" action="{{ path('admin.gallery.delete',{id: gallery.id}) }}" style="display: inline-block"
+                        onsubmit="return confirm('Etes vou vraiment sur ?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete'~gallery.id) }}">
+                        <button class="btn btn-danger"><i class="fas fa-trash-alt" style="padding-right:5px;"></i>
+                            Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+
+
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <div class="navigation center-cols center-align">
+        {{ knp_pagination_render(gallery) }}
+    </div>
+</div>
+
+
+
+
+{% endblock body %}

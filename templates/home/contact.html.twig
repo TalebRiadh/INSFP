@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="img/favicon.png" type="image/png" />
+    <title>Contact</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/flaticon.css" />
+    <link rel="stylesheet" href="css/themify-icons.css" />
+    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css" />
+    <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css" />
+    <!-- main css -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!--================ Start Header Menu Area =================-->
+               <header class="header_area">
+                <div class="main_menu">
+
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <div
+                            class="container">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <a class="navbar-brand logo_h" href="index.html">
+                                <img alt="" src="img/logo3.png"/>
+                            </a>
+                            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                                <ul class="nav navbar-nav menu_nav ml-auto">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="index.html">Acceuil</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="about-us.html">À propos de nous</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="courses.html">Cours</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="blog.html">Evenements</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="contact.html">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+    <!--================ End Header Menu Area =================-->
+
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="banner_content text-center">
+                <h2>Contacter Nous</h2>
+                <div class="page_link">
+                  <a href="index.html">Accueil</a>
+                  <a href="contact.html">Contact</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+35°10'08.5"N 0°41'31.3"W
+   35.169029, -0.692021
+    <!--================Contact Area =================-->
+    <section class="contact_area section_gap">
+      <div class="container">
+        <div
+          id="mapBox"
+          class="mapBox"
+          data-lat="35.169029"
+          data-lon="-0.692021"
+          data-zoom="8"
+          data-info="INSFP"
+          data-mlat="35.169029"
+          data-mlon="-0.692021"
+        ></div>
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="contact_info">
+              <div class="info_item">
+                <i class="ti-home"></i>
+                <h6>Sidi lahcen, Sidi Bel Abbes</h6>
+                <p>Rue N05 ......</p>
+              </div>
+              <div class="info_item">
+                <i class="ti-headphone"></i>
+                <h6><a href="#">+213 77 77 77 777</a></h6>
+                <p>Dimanche jusqu'ou Jeudi 9:00 a 18:00</p>
+              </div>
+              <div class="info_item">
+                <i class="ti-email"></i>
+                <h6><a href="#">INSFP@INSFP.com</a></h6>
+                <p>Envoie Nous Vos Questions</p>
+              </div>
+            </div>
+          </div>
+          <br><br><br><br>
+          <div class="col-lg-9">
+               {{ form_start(form) }}
+                {{ form_row(form.mTo) }}
+                <br><br>
+                {{ form_row(form.container) }}
+                {{ form_rest(form) }}
+              <button class="btn btn-primary">{{ button|default('Envoyer') }}</button>
+            {{ form_end(form) }}
+      </div>
+    </section>
+    <!--================Contact Area =================-->
+
+    <!--================ start footer Area  =================-->
+       <footer class="footer-area section_gap">
+                <div class="container">
+                    <div class="row">
+                         <div class="col-lg-4 col-md-6 single-footer-widget">
+                                                         <img alt="" src="img/logo3.png"/>
+
+                        </div>
+                        <div class="col-lg-2 col-md-6 single-footer-widget">
+                            <h4>Menu</h4>
+                            <ul>
+                                <li><a href="#">Accuil</a></li>
+                                <li><a href="#">À propos de nous</a></li>
+                                <li><a href="#">Cours</a></li>
+                                <li><a href="#">Evenements</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                        
+                        
+                        
+                       
+                    </div>
+                    <div class="row footer-bottom d-flex justify-content-between">
+                        <p
+                            class="test col-lg-8 col-sm-12 footer-text m-0 text-white">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            All rights reserved | This template is made with
+                            <i aria-hidden="true" class="ti-heart"></i>
+                            by
+                            <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                        <div class="col-lg-4 col-sm-12 footer-social">
+                            <a href="#">
+                                <i class="ti-facebook"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+    <!--================ End footer Area  =================-->
+
+    <!--================Contact Success and Error message Area =================-->
+    <div id="success" class="modal modal-message fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <i class="ti-close"></i>
+            </button>
+            <h2>Thank you</h2>
+            <p>Your message is successfully sent...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals error -->
+
+    <div id="error" class="modal modal-message fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <i class="ti-close"></i>
+            </button>
+            <h2>Sorry !</h2>
+            <p>Something went wrong</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--================End Contact Success and Error message Area =================-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/stellar.js"></script>
+    <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/owl-carousel-thumb.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <!--gmaps Js-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmqZNWnoKoja-BV43Z8WOjD60eKi7Fpf4"></script>
+    <script src="js/gmaps.min.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/theme.js"></script>
+  </body>
+</html>

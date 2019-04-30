@@ -1,0 +1,74 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title 'Option' %}
+{% block body %}
+<div class="row">
+    <div class="col-md-4">
+        <h1 class="center-align  "><i class="fas fa-cog"></i> Option </h1>
+    </div>
+</div>
+   <div class="col-lg-5 col-s1 " style="margin-top:32px;margin-bottom:20px" id="button-add">
+            <button class="btn btn-light ">
+              <i id="btn-slide" class="fas fa-chevron-down" style="padding-right:10px;"></i> ajouter une spécialité
+            </button>
+        </div>
+<div class="col-lg-11" id="hide">
+    {{ form_start(form) }}
+    <div class="row form-group">
+        <div class=" col-lg-2 col-s2 mr-2 ">
+            {{ form_row(form.name) }}
+        </div>
+        {{ form_end(form)}}
+         <div class="col-lg-5 col-s1 " style="margin-top:32px">
+            <admin class="btn btn-success" id="ajout">
+            <i class="fas fa-plus" style="padding-right:5px;"></i> Ajouter
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid ">
+    <table class="table table-striped" id="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Specialité</th>
+                <th>Modules</th>
+                 <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for specialite in specliates %}
+            <tr>
+                <td>{{ specialite.id }}</td>
+                <td>{{ specialite.name }}</td>
+                <td>
+               
+                {% for module in specialite.getModules() %}
+                <span class=" badge badge-secondary" >{{module.nom}}</span>
+                            {% endfor %}
+                </td>
+                 <td><a href="{{ path('admin.specialite.edit',{id: specialite.id}) }}" class="btn btn-secondary"><i
+                            class="fas fa-edit" style="padding-right:5px;"></i>Editer</a>
+                    <a href="{{ path('admin.module.edit',{id: specialite.id}) }}" class="btn btn-warning"><i
+                        class="fas fa-edit" style="padding-right:5px;"></i>Editer les Modules</a>
+                    <form method="post" action="{{ path('admin.specialite.delete',{id: specialite.id}) }}" style="display: inline-block"
+                        onsubmit="return confirm('Etes vou vraiment sur ?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete'~specialite.id) }}">
+                        <button class="btn btn-danger"><i class="fas fa-trash-alt" style="padding-right:5px;"></i>Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+
+
+
+{% endblock body %}

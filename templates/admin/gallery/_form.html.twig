@@ -1,0 +1,14 @@
+<div class="container mt-15">
+    {{form_start(form)}}
+    <div class="row">
+        <div class="col-3">{{form_row(form.titre)}}</div>
+
+    </div>
+    <div class="row">
+        <div class="col-4 ">{{ form_row(form.photo) }}</div>
+    </div>
+    {{ form_rest(form) }}
+    <button class="btn btn-primary"><i class="fas fa-upload" style="padding-right:10px;"></i>{{
+        button|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
+</div>

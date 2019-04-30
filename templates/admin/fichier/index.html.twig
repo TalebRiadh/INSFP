@@ -1,0 +1,102 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title 'Gerer les Fichiers' %}
+{% block body %}
+<div class="row">
+    <div class="col-md-4">
+        <h1 class="center-align  "><i class="fas fa-file-pdf"></i> Gérer les Fichiers </h1>
+    </div>
+</div>
+ {% for message in app.flashes('success') %}
+    <div class="alert alert-success"id="successMessage">{{ message }}</div>
+    {% endfor %}
+            <div class="col-lg-11" >
+                                    {{ form_start(form) }}
+                                    <div class="row form-group float-right" >
+                                        <div class=" col-lg-4 col-s6 mr-2">
+                                            {{ form_row(form.specialite) }}
+                                        </div>
+                                        <div class=" col-lg-4 col-s6 mr-1">
+                                            {{ form_row(form.module) }}
+                                        </div>
+                                        
+                                        <div class="col-lg-3 col-s1 " style="margin-top:32px">
+                                            <button class="btn btn-success">
+                                                <i class="fas fa-search" style="padding-right:5px;"></i> Rechercher
+                                            </button>
+                                                            </div>
+
+                                        {{ form_end(form)}}
+        </div>
+
+<div class="container-fluid " >
+   
+    <a href="{{ path('add_fichier') }}" class="btn btn-primary mb-3"><i class="fas fa-file-alt" style="padding-right:10px;"></i>Créer
+        un fichier</a>
+    <table class="table table-striped" >
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Type</th>
+                <th>Specialité</th>
+                <th>Module</th>
+
+                <th>Semestre</th>
+                <th>Créer par</th>
+
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for fichier in fichier %}
+            <tr>
+                <td>{{ fichier.titre }}</td>
+                <td>
+                    {% if fichier.type == 0 %}
+                    Cour
+                    {% elseif fichier.type == 1 %}
+                    TD
+                    {% else %}
+                    TP
+                    {% endif %}</td>
+                <td>
+                    {% if fichier.specialite == 0 %}
+                    Informatique
+                    {% elseif fichier.specialite == 1 %}
+                    Genie Logiciel
+                    {% else %}
+                    Systeme d'exploitation
+                    {% endif %}</td>
+                <td>{{ fichier.module }}</td>
+                <td>{{ fichier.semestre }}</td>
+                <td>{{ fichier.createdBy }}</td>
+
+                <td><a href="{{ path('admin.fichier.edit',{id: fichier.id}) }}" class="btn btn-secondary"><i
+                            class="fas fa-edit" style="padding-right:5px;"></i>Editer</a>
+                    <a href="{{ vich_uploader_asset(fichier,'pdfFile')  }}" class="btn btn-info"><i class="fas fa-eye"
+                            style="padding-right:5px;"></i>Voir</a>
+                    <form method="post" action="{{ path('admin.fichier.delete',{id: fichier.id}) }}" style="display: inline-block"
+                        onsubmit="return confirm('Etes vou vraiment sur ?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete'~fichier.id) }}">
+                        <button class="btn btn-danger"><i class="fas fa-trash-alt" style="padding-right:5px;"></i>Supprimer</button>
+                    </form>
+                </td>
+
+            </tr>
+
+
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <div class="navigation center-cols center-align">
+        {{ knp_pagination_render(fichier) }}
+    </div>
+</div>
+
+
+
+
+{% endblock body %}

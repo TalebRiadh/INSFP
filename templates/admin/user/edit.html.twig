@@ -1,0 +1,11 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <h2>
+        <i class="fas fa-user-cog fa-2x" style="padding-right:5px;"></i> Editer le Membre
+    </h2>
+    {{ include ('admin/user/_form.html.twig',{button: 'Editer'}) }}
+</div>
+{% endblock %}
