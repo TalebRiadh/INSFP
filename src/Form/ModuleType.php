@@ -18,7 +18,7 @@ class ModuleType extends AbstractType
                        'data-role'=>'tagsinput',
                        'value' =>"",
                 ),
-                                       'label' =>'Modules'
+                'label' =>'Modules'
 
             ))
         ;

@@ -71,7 +71,7 @@ class informationController extends AbstractController
 
         return $this->render('Admin/option/index.html.twig', [
             'current' => 3,
-            'specliates' => $specialites,
+            'specialites' => $specialites,
             'form' => $form->createView(),
             'form_m'=> $module_f->createView()
         ]);

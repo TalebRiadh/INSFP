@@ -1,0 +1,74 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title 'Option' %}
+{% block body %}
+<div class="row">
+    <div class="col-md-4">
+        <h1 class="center-align  "><i class="fas fa-cog"></i> Option </h1>
+    </div>
+</div>
+   <div class="col-lg-5 col-s1 " style="margin-top:32px;margin-bottom:20px" id="button-add">
+            <button class="btn btn-light ">
+              <i id="btn-slide" class="fas fa-chevron-down" style="padding-right:10px;"></i> ajouter une Formation
+            </button>
+        </div>
+<div class="col-lg-11" id="hide">
+    {{ form_start(form) }}
+    <div class="row form-group">
+        <div class=" col-lg-2 col-s2 mr-2 ">
+            {{ form_row(form.name) }}
+        </div>
+        {{ form_end(form)}}
+         <div class="col-lg-5 col-s1 " style="margin-top:32px">
+            <admin class="btn btn-success" id="ajout">
+            <i class="fas fa-plus" style="padding-right:5px;"></i> Ajouter
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid ">
+    <table class="table table-striped" id="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Formation</th>
+                <th>Specialités</th>
+                 <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for formation in formations %}
+            <tr>
+                <td>{{ formation.id }}</td>
+                <td>{{ formation.name }}</td>
+                <td>
+               
+                {% for Specialite in formation.getSpecialites() %}
+                <span class=" badge badge-secondary" >{{Specialite.name}}</span>
+                            {% endfor %}
+                </td>
+                 <td><a href="{{ path('admin.formation.edit',{id: formation.id}) }}" class="btn btn-secondary"><i
+                            class="fas fa-edit" style="padding-right:5px;"></i>Editer</a>
+                    <a href="{{ path('admin.formation_s.edit',{id: formation.id}) }}" class="btn btn-warning"><i
+                        class="fas fa-edit" style="padding-right:5px;"></i>Editer les Specialites</a>
+                    <form method="post" action="{{ path('admin.formation.delete',{id: formation.id}) }}" style="display: inline-block"
+                        onsubmit="return confirm('Etes vou vraiment sur ?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete'~formation.id) }}">
+                        <button class="btn btn-danger"><i class="fas fa-trash-alt" style="padding-right:5px;"></i>Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+
+
+
+{% endblock body %}

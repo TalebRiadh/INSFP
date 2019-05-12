@@ -120,7 +120,7 @@ class FichierController extends AbstractController
             $fichier->onPreUpdate();
             $this->em->flush();
             $this->addFlash('success', 'bien modifié avec succés');
-            return $this->redirectToRoute('admin.fichier.index');
+            return $this->redirectToRoute('show_fichier');
         }
 
         return $this->render('admin/fichier/edit.html.twig', [

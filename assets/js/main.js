@@ -6,9 +6,10 @@ require('../css/app.css');
 $(function () {
     /*--------------------ajax ---------------*/
     $('#ajout').click(function () {
-        var spc = $("#specialite_name").val()
+        var spc = $("#formation_name").val()
+        console.log(spc)
         $.ajax({
-            url: "/admin/specialite_ajax",
+            url: "/admin/formation/formation_ajax",
             type: "POST",
             dataType: "json",
             data: {
@@ -27,17 +28,17 @@ $(function () {
     });
     /*-----------------------------------------------*/
     $('.bdg').each(function (index) {
-        $('#module_nom').tagsinput('add', $(this).text());
+        $('#specialite_name').tagsinput('add', $(this).text());
     });
     var id_spc = $(".id_spc").text()
     $("span[data-role='remove']").click(function () {
         console.log($(this).parent().text());
     })
-    $('#module_nom').on('itemAdded', function (event) {
+    $('#specialite_name').on('itemAdded', function (event) {
         console.log(event.item);
 
         $.ajax({
-            url: "/admin/specialite/module_add_ajax",
+            url: "/admin/formation/specialite_add_ajax",
             type: "POST",
             dataType: "json",
             data: {
@@ -54,9 +55,9 @@ $(function () {
             }
         })
     });
-    $('#module_nom').on('itemRemoved', function (event) {
+    $('#specialite.name').on('itemRemoved', function (event) {
         $.ajax({
-            url: "/admin/specialite/module_delete_ajax",
+            url: "/admin/formation/specialite_delete_ajax",
             type: "POST",
             dataType: "json",
             data: {

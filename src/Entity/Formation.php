@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SpecialiteRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\FormationRepository")
  */
-class Specialite
+class Formation
 {
    /**
      * @ORM\Id
@@ -24,38 +24,22 @@ class Specialite
     private $name;
 
 /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="specialite")
+     * @ORM\OneToMany(targetEntity="App\Entity\Specialite", mappedBy="Formation")
      */
-    private $modules;
+    private $specialite;
 
-        /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Formation", inversedBy="modules")
-     */
-    private $Formation;
-
-     public function getFormation(): ?Formation
-    {
-        return $this->Formation;
-    }
-
-    public function setFormation(?Formation $Formation): self
-    {
-        $this->Formation = $Formation;
-
-        return $this;
-    }
 
     public function __construct()
     {
-        $this->modules = new ArrayCollection();
+        $this->specialite = new ArrayCollection();
     }
 
     /**
-     * @return Collection|Module[]
+     * @return Collection|specialite[]
      */
-    public function getModules(): Collection
+    public function getSpecialites(): Collection
     {
-         return $this->modules;
+         return $this->specialite;
     }
     /**
      * Get the value of id

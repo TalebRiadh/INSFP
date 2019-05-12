@@ -88,6 +88,11 @@ class Fichier
     protected $updated;
 
 
+     public function __toString()
+    {
+        return $this->specialite;
+    }
+
     
     /*---------------------------------------------------------------- */
     public function getId() : ? int

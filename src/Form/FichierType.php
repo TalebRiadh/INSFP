@@ -3,10 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Fichier;
+use App\Entity\Specialite;
+use App\Entity\Module;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class FichierType extends AbstractType
@@ -20,15 +25,13 @@ class FichierType extends AbstractType
                     'Cour' => 0,
                     'TD' => 1,
                     'TP' => 2,
+                    'Document' => 3,
                 ],
             ])
-            ->add('specialite', ChoiceType::class, [
-                'choices' => [
-                    'Informatique' => 0,
-                    'Genie Logiciel' => 1,
-                    "Systeme d'information" => 2,
-                ],
-            ])
+            ->add('specialite', EntityType::class, [
+            'class' => Specialite::class,
+            'label' =>'Specialité',
+            'choice_label' => 'name'])
             ->add(
                 'annee',
                 ChoiceType::class,
@@ -51,19 +54,19 @@ class FichierType extends AbstractType
                     'choices' => [
                         '1' => 1,
                         '2' => 2,
+                        '3' => 3,
+                        '4' => 4,
+                        '5' => 5,
+
                     ],
                 ]
             )
              ->add(
                 'module',
-                ChoiceType::class,
-                [
-                    'choices' => [
-                        'Algorithme' => "Algorithme",
-                        'Math' => "Math",
-                    ],
-                ]
-            )
+                EntityType::class, [
+            'class' => Module::class,
+            'label' =>'Module',
+            'choice_label' => 'nom'])
             ->add('pdfFile', FileType::class, array(
                 'label' => 'Fichier',
 

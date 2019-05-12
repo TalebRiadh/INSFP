@@ -77,6 +77,14 @@ class User implements UserInterface, \Serializable
      */
     protected $created;
 
+    /**
+     * @var datetime $updated
+     * 
+     * @ORM\Column(type="datetime", nullable = true)
+     */
+    protected $updated;
+
+
     /*----------- getters and setters ----------------------------*/
 
     public function getId() : ? int
@@ -175,6 +183,16 @@ class User implements UserInterface, \Serializable
     public function onPrePersist()
     {
         $this->created = new \DateTime("now");
+    }
+
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updated = new \DateTime("now");
     }
    /*---------- OVERRIDING ---------------*/
 

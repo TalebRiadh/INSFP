@@ -1,0 +1,12 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <h2 style="margin-bottom:80px;">
+        <i class="fas fa-newspaper fa-2x" style="padding-right:5px;"></i>  editer une formation 
+    </h2>                
+      {{ include ('admin/option/formation/_form.html.twig',{button: 'Editer'}) }}
+
+</div>
+{% endblock %}

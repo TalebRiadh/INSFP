@@ -10,21 +10,21 @@
  {% for message in app.flashes('success') %}
     <div class="alert alert-success"id="successMessage">{{ message }}</div>
     {% endfor %}
-            <div class="col-lg-11" >
+            <div class="col-lg-12" >
                                     {{ form_start(form) }}
                                     <div class="row form-group float-right" >
-                                        <div class=" col-lg-4 col-s6 mr-2">
+                                        <div class=" col-lg-3 col-s6">
                                             {{ form_row(form.specialite) }}
                                         </div>
-                                        <div class=" col-lg-4 col-s6 mr-1">
+                                        <div class=" col-lg-4 col-s6 ">
                                             {{ form_row(form.module) }}
                                         </div>
                                         
-                                        <div class="col-lg-3 col-s1 " style="margin-top:32px">
+                                        <div class="col-lg-5 col-s1 " >
                                             <button class="btn btn-success">
                                                 <i class="fas fa-search" style="padding-right:5px;"></i> Rechercher
                                             </button>
-                                                            </div>
+                                        </div>
 
                                         {{ form_end(form)}}
         </div>

@@ -3,45 +3,27 @@
 namespace App\Form;
 
 use App\Entity\FichierSearch;
+use App\Entity\Specialite;
+use App\Entity\Module;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class FichierSearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('module', ChoiceType::class, [
-                'required' => false,
-                'placeholder' => 'Module',
-                'label' =>false,
-                'choices' => [
-                    'informatique' => 0,
-                    'genie logiciel' => 1,
-                    "System d'information" => 2,
-                ],
-                'attr' => [
-                    'placeholder' => 'Module'
-                ]
-            ])
-            ->add('specialite', ChoiceType::class, [
-                'required' => false,
-                'label' =>false,
-                    'placeholder' => 'Spécialité',
-
-                'choices' => [
-                    'informatique' => 0,
-                    'genie logiciel' => 1,
-                    "System d'information" => 2,
-                ],
-                'attr' => [
-                    'placeholder' => 'Specialité'
-                ]
-            ]);
+            ->add('module',  EntityType::class, [
+            'class' => Module::class,
+            'label' =>'Module',
+            'choice_label' => 'nom'])
+            ->add('specialite',  EntityType::class, [
+            'class' => Specialite::class,
+            'label' =>'Specialité',
+            'choice_label' => 'name']);
     }
 
     public function configureOptions(OptionsResolver $resolver)

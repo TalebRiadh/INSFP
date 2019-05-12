@@ -100,12 +100,15 @@ class UserController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function edit(User $user, Request $request)
+    public function edit(User $user, Request $request,UserPasswordEncoderInterface $encoder)
     {
         $form = $this->createForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
+            $user->onPreUpdate();
             $this->em->flush();
             $this->addFlash('success', 'bien modifié avec succés');
             return $this->redirectToRoute('admin.user.index');
