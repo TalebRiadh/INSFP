@@ -66,7 +66,7 @@ class FormationController extends AbstractController
     }
 
         return $this->render('Admin/option/formation/index.html.twig', [
-            'current' => 3,
+            'current' => 8,
             'formations' => $formations,
             'form' => $form->createView(),
             'form_f'=> $formation_f->createView()
@@ -161,7 +161,7 @@ class FormationController extends AbstractController
         return $this->render('admin/option/formation/edit.html.twig', [
             'formation' => $formation,
             'form' => $form->createView(),
-            'current' => 3
+            'current' => 8
 
         ]);
 
@@ -187,7 +187,7 @@ class FormationController extends AbstractController
         return $this->render('admin/option/formation/edit_s.html.twig', [
             'formation' => $formation,
             'form_m' => $specialite_f->createView(),
-            'current' => 3
+            'current' => 8
 
         ]);
 

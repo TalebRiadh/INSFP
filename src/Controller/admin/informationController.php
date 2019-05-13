@@ -64,7 +64,7 @@ class informationController extends AbstractController
     }
 
         return $this->render('Admin/option/index.html.twig', [
-            'current' => 8,
+            'current' => 9,
             'specialites' => $specialites,
             'form' => $form->createView(),
             'form_m'=> $module_f->createView()
@@ -162,7 +162,7 @@ $qb->getQuery()->execute();
         return $this->render('admin/option/edit.html.twig', [
             'specialite' => $specialite,
             'form' => $form->createView(),
-            'current' => 8
+            'current' => 9
 
         ]);
 
