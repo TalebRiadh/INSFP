@@ -16,6 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Twig\Environment;
+
+
 class informationController extends AbstractController
 {
 
@@ -51,26 +53,18 @@ class informationController extends AbstractController
 
     public function index()
     {
-        /*
-            $spc = $this->repository->find(1);
-             $spc->getModules();
-             foreach ($spc->getModules() as $module) {
-            dump($module);
-        }
-        */
             $specliate = new Specialite();
             $module = new Module();
             $form = $this->createForm(SpecialiteType::class, $specliate );
             $module_f = $this->createForm(ModuleType::class, $module);
             $specialites = $this->repository->findall();
-            dump($specialites);
             foreach ($specialites as $spc) {
                 foreach ($spc->getModules() as $module) {
         }
     }
 
         return $this->render('Admin/option/index.html.twig', [
-            'current' => 3,
+            'current' => 8,
             'specialites' => $specialites,
             'form' => $form->createView(),
             'form_m'=> $module_f->createView()
@@ -168,7 +162,7 @@ $qb->getQuery()->execute();
         return $this->render('admin/option/edit.html.twig', [
             'specialite' => $specialite,
             'form' => $form->createView(),
-            'current' => 3
+            'current' => 8
 
         ]);
 
@@ -194,7 +188,7 @@ $qb->getQuery()->execute();
         return $this->render('admin/option/edit_m.html.twig', [
             'specialite' => $specialite,
             'form_m' => $module_f->createView(),
-            'current' => 3
+            'current' => 8
 
         ]);
 
@@ -208,6 +202,22 @@ $qb->getQuery()->execute();
     public function remove(Specialite $specialite, Request $request)
     {
         if ($this->isCsrfTokenValid('delete' . $specialite->getId(), $request->get('_token'))) {
+            $connection = $this->em->getConnection();
+            $statement = $connection->prepare("SELECT *
+            FROM specialite as s
+            INNER JOIN module as m
+            ON m.specialite_id =  s.id 
+            WHERE m.specialite_id =:id");
+            $statement->bindValue('id',$specialite->getId());
+            $statement->execute();
+            $results = $statement->fetchAll();
+            $modules = $specialite->getModules()->getValues();
+            foreach($modules as $module)
+            {
+                $modulea = $this->r->find($module->getId());
+                $this->em->remove($modulea);
+                $this->em->flush();
+             }
             $this->em->remove($specialite);
             $this->em->flush();
             $this->addFlash('success', 'Specialité supprimé avec succés');

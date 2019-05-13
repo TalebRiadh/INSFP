@@ -16,6 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Twig\Environment;
+
+
+
 class FormationController extends AbstractController
 {
 
@@ -51,21 +54,14 @@ class FormationController extends AbstractController
 
     public function index()
     {
-        /*
-            $spc = $this->repository->find(1);
-             $spc->getModules();
-             foreach ($spc->getModules() as $module) {
-            dump($module);
-        }
-        */
+ 
             $formation = new Formation();
             $specialite = new Specialite();
             $form = $this->createForm(FormationType::class, $formation );
             $formation_f = $this->createForm(FormationType::class, $formation);
             $formations = $this->repository->findall();
-            dump($formations);
             foreach ($formations as $formation) {
-                foreach ($formation->getSpecialites() as $specialite) {
+            foreach ($formation->getSpecialites() as $specialite) {
         }
     }
 

@@ -26,6 +26,53 @@ $(function () {
         })
 
     });
+    /*---------------------------------------------------*/
+    $('.bdg').each(function (index) {
+        $('#module_nom').tagsinput('add', $(this).text());
+    });
+    var id_spc = $(".id_spc").text()
+    $("span[data-role='remove']").click(function () {
+        console.log($(this).parent().text());
+    })
+    $('#module_nom').on('itemAdded', function (event) {
+        console.log(event.item);
+
+        $.ajax({
+            url: "/admin/specialite/module_add_ajax",
+            type: "POST",
+            dataType: "json",
+            data: {
+                "add": event.item,
+                "id": id_spc
+            },
+            async: true,
+            success: function (data) {
+                console.log(data);
+
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Ajax request failed.');
+            }
+        })
+    });
+    $('#module_nom').on('itemRemoved', function (event) {
+        $.ajax({
+            url: "/admin/specialite/module_delete_ajax",
+            type: "POST",
+            dataType: "json",
+            data: {
+                "module": event.item,
+            },
+            async: true,
+            success: function (data) {
+                console.log(data);
+
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Ajax request failed.');
+            }
+        })
+    });
     /*-----------------------------------------------*/
     $('.bdg').each(function (index) {
         $('#specialite_name').tagsinput('add', $(this).text());

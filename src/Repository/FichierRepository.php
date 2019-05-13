@@ -92,7 +92,7 @@ class FichierRepository extends ServiceEntityRepository
     public function findAllVisibleQuerybyprof(FichierSearch $search,String $nom) : Query
     {
         $query = $this->createQueryBuilder('p');
-        $query = $query->andwhere(' p.nom like :nom')
+        $query = $query->andwhere(' p.createdBy like :nom')
                         ->setParameter('nom', $nom );
         if ($search->getModule()) {
             $query = $query->andwhere(' p.module like :module')

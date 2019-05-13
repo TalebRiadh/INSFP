@@ -160,7 +160,7 @@ class User implements UserInterface, \Serializable
     public function getRoles() : array
     {
         $roles = $this->roles;
-        if ($this->role === 0 ) {
+        if ($this->role === 0 || $this->role === 1 ) {
             $roles[] = 'ROLE_ADMIN';
         } else {
             $roles[] = 'ROLE_USER';
