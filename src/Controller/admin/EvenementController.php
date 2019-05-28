@@ -3,7 +3,10 @@
 namespace App\Controller\admin;
 
 use App\Entity\News;
+use App\Entity\Files;
+
 use App\Form\NewsType;
+use App\Form\FilesType;
 
 use App\Service\FileUploader;
 use App\Repository\NewsRepository;
@@ -117,12 +120,13 @@ class EvenementController extends AbstractController
     public function edit(ObjectManager $em,News $news, Request $request)
     {
 
-        /*$form->handleRequest($request);
+        $form = $this->createForm(NewsType::class, $news);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
             $this->addFlash('success', 'bien modifié avec succés');
-            return $this->redirectToRoute('admin.news.index');
-        }*/
+            return $this->redirectToRoute('admin.evenement.index');
+        }
             $connection = $em->getConnection();
             $statement = $connection->prepare("SELECT file
 FROM news as n
@@ -145,6 +149,7 @@ WHERE n.id =:id");
  dump($results) ;
 
         return $this->render('admin/evenement/edit.html.twig', [
+            'form' =>$form->createView(),
             'results' => $results,
             'current' => 5,
             'extension' =>$extension

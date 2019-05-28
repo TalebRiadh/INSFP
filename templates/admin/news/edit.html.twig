@@ -6,6 +6,8 @@
     <h2 style="margin-bottom:80px;">
         <i class="fas fa-newspaper fa-2x" style="padding-right:5px;"></i>  editer une nouvelle 
     </h2>                
+            {{ include ('admin/news/_form.html.twig',{button: 'Editer'}) }}
+<br>
     {% for result in results %}
                 {% for extension in extension %}
                     {% if extension=="png" or extension=="jpg"   %}

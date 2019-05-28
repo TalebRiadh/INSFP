@@ -1,11 +1,27 @@
 <div class="container mt-15">
             {{ form_start(form)}}
-        {{ form_row(form.titre) }}
+
+             <div class="row">
+            <div class=" col col-md-6 col-xs-12 col-s-12">
+                {{ form_row(form.titre) }}
+            </div>
+            <div class=" col col-md-6 col-xs-12 col-s-12">
+                {{ form_row(form.date_de_evenement,{'label':"Date de l'evenement"}) }}
+            </div>
+        </div>
         {{ form_row(form.discription) }}
-        <ul class="files" data-prototype="{{ form_widget(form.files.vars.prototype)|e('html_attr') }}">
+                     <div class="row">
+            <div class=" col col-md-3 col-xs-6 col-s-6">
+                {{ form_row(form.start) }}
+            </div>
+             <div class=" col col-md-3 col-xs-6 col-s-6">
+                {{ form_row(form.end) }}
+            </div>
+        </div>
+ <ul class="files" data-prototype="{{ form_widget(form.files.vars.prototype)|e('html_attr') }}">
             {% for element in form.files %}
             <li>
-                {{ form_widget(element.file) }}
+                {{ form_widget(element.file,{'label':"Ajouter un fichier"}) }}
             </li>
             {% endfor %}
         </ul>

@@ -60,14 +60,8 @@
                     {% else %}
                     TP
                     {% endif %}</td>
-                <td>
-                    {% if fichier.specialite == 0 %}
-                    Informatique
-                    {% elseif fichier.specialite == 1 %}
-                    Genie Logiciel
-                    {% else %}
-                    Systeme d'exploitation
-                    {% endif %}</td>
+                <td>{{ fichier.specialite }}
+                  </td>
                 <td>{{ fichier.module }}</td>
                 <td>{{ fichier.semestre }}</td>
                 <td>{{ fichier.createdBy }}</td>

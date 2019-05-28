@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,40 +21,14 @@ class Specialite
      */
     private $name;
 
-/**
-     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="specialite")
-     */
-    private $modules;
 
-        /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Formation", inversedBy="modules")
-     */
-    private $Formation;
 
-     public function getFormation(): ?Formation
-    {
-        return $this->Formation;
-    }
-
-    public function setFormation(?Formation $Formation): self
-    {
-        $this->Formation = $Formation;
-
-        return $this;
-    }
 
     public function __construct()
     {
-        $this->modules = new ArrayCollection();
     }
 
-    /**
-     * @return Collection|Module[]
-     */
-    public function getModules(): Collection
-    {
-         return $this->modules;
-    }
+  
     /**
      * Get the value of id
      */ 

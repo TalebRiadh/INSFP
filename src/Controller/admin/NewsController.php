@@ -115,13 +115,13 @@ class NewsController extends AbstractController
      */
     public function edit(ObjectManager $em,News $news, Request $request)
     {
-
-        /*$form->handleRequest($request);
+        $form = $this->createForm(NewsType::class, $news);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
             $this->addFlash('success', 'bien modifié avec succés');
             return $this->redirectToRoute('admin.news.index');
-        }*/
+        }
                 $connection = $em->getConnection();
            
             $statement = $connection->prepare("SELECT file
@@ -143,6 +143,7 @@ WHERE n.id =:id");
         
         return $this->render('admin/news/edit.html.twig', [
             'results' => $result,
+            'form' =>$form->createView(),
             'current' => 4,
             'extension' =>$extension
         ]);

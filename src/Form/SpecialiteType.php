@@ -14,11 +14,7 @@ class SpecialiteType extends AbstractType
     {
         $builder     
                ->add('name',TextType::class,array(
-                    'attr' =>array(
-                       'data-role'=>'tagsinput',
-                       'value' =>"",
-                ),
-                'label' => 'Specialité'
+                'label' => 'Nom de Specialité'
                ))
         ;
     }

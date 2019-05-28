@@ -13,7 +13,6 @@
             <tr>
                 <th>#</th>
                 <th>Specialité</th>
-                <th>Modules</th>
                  <th>Action</th>
             </tr>
         </thead>
@@ -23,12 +22,6 @@
             <tr>
                 <td>{{ specialite.id }}</td>
                 <td>{{ specialite.name }}</td>
-                <td>
-               
-                {% for module in specialite.getModules() %}
-                <span class=" badge badge-secondary" >{{module.nom}}</span>
-                            {% endfor %}
-                </td>
                  <td><a href="{{ path('admin.specialite.edit',{id: specialite.id}) }}" class="btn btn-secondary"><i
                             class="fas fa-edit" style="padding-right:5px;"></i>Editer</a>
                     <a href="{{ path('admin.module.edit',{id: specialite.id}) }}" class="btn btn-warning"><i

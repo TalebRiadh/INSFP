@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Module
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -22,11 +22,11 @@ class Module
     private $nom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Specialite", inversedBy="modules")
+        * @ORM\Column(type="integer")
      */
-    private $specialite;
+    private $specialite_id;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -45,14 +45,23 @@ class Module
         return $this;
     }
 
-    public function getSpecialite(): ?Specialite
+
+    /**
+     * Get the value of specialite_id
+     */ 
+    public function getSpecialite_id()
     {
-        return $this->specialite;
+        return $this->specialite_id;
     }
 
-    public function setSpecialite(?Specialite $specialite): self
+    /**
+     * Set the value of specialite_id
+     *
+     * @return  self
+     */ 
+    public function setSpecialite_id($specialite_id)
     {
-        $this->specialite = $specialite;
+        $this->specialite_id = $specialite_id;
 
         return $this;
     }

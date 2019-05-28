@@ -55,7 +55,20 @@ class GalleryController extends AbstractController
             'current' => 6
         ]);
     }
+    /**
+     * @Route("/admin/gallery/view",name="show_view")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
+     */
+ public function generalView()
+    {  
+        $gallery = $this->repository->findAll();
 
+        return $this->render('Admin/gallery/view.html.twig', [
+            'gallery' => $gallery,
+            'current' => 6
+        ]);
+    }
     /**
      * @Route("/admin/gallery/add", name="add_image")
      * @param Request $request

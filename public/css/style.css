@@ -365,8 +365,8 @@ button:focus {
   left: 0;
   right: 0;
   background-image: linear-gradient(to right,
-    #2E4DB0,
-    #172758);
+      #2E4DB0,
+      #172758);
   -webkit-transform: translateY(70px);
   -moz-transform: translateY(70px);
   -ms-transform: translateY(70px);

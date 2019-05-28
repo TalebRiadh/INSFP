@@ -4,19 +4,67 @@ require('../css/app.css');
 
 
 $(function () {
+    $('#alert').hide()
+    var spc_nom;
+    //$("input[type^='checkbox']").first().hide();
+    $('#btn_spcl').click(function () {
+        spc_nom = $('#nomspecialite').val()
+
+        $.ajax({
+            url: "/admin/specialite_ajout_ajax",
+            type: "POST",
+            dataType: "json",
+            data: {
+                "specialite_static": spc_nom,
+            },
+            async: true,
+            success: function (data) {
+
+                $('#alert').append('<p>' + data.message + '</p>') /* location.reload(true);*/
+                $('#alert').show()
+                setTimeout(function () {
+                    $("#alert").hide()
+                }, 2000);
+
+
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Ajax request failed.');
+            }
+        })
+
+    })
+
+    $("#submitButton").click(function () {
+
+        var selected = [];
+        $('input:checked').each(function () {
+            selected.push($(this).val());
+        });
+        console.log(selected);
+
+
+    });
+
     /*--------------------ajax ---------------*/
     $('#ajout').click(function () {
         var spc = $("#formation_name").val()
-        console.log(spc)
+        var selected = [];
+        $('input:checked').each(function () {
+            selected.push($(this).val());
+        });
+        selected.getValue
         $.ajax({
             url: "/admin/formation/formation_ajax",
             type: "POST",
             dataType: "json",
             data: {
-                "spc": spc
+                "spc": spc,
+                "specialite_formation": selected,
             },
             async: true,
             success: function (data) {
+                console.log(data)
                 location.reload(true);
 
             },
@@ -30,20 +78,19 @@ $(function () {
     $('.bdg').each(function (index) {
         $('#module_nom').tagsinput('add', $(this).text());
     });
-    var id_spc = $(".id_spc").text()
+
     $("span[data-role='remove']").click(function () {
         console.log($(this).parent().text());
     })
     $('#module_nom').on('itemAdded', function (event) {
         console.log(event.item);
-
         $.ajax({
             url: "/admin/specialite/module_add_ajax",
             type: "POST",
             dataType: "json",
             data: {
                 "add": event.item,
-                "id": id_spc
+                "id": $('#nomspecialite').val()
             },
             async: true,
             success: function (data) {
@@ -135,5 +182,5 @@ $(function () {
     // $("#successMessage").hide() function
     setTimeout(function () {
         $("#successMessage").hide()
-    }, 5000);
+    }, 2000);
 });

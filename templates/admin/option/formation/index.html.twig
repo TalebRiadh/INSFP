@@ -18,10 +18,28 @@
         <div class=" col-lg-2 col-s2 mr-2 ">
             {{ form_row(form.name) }}
         </div>
+        <br>
+    <div class=" col-lg-2 col-s2 mr-2 form-check ">
+        {{ form_label(form.Specialite) }}
+    <br>
+    <input type="checkbox" class="selectAllCheckboxes">Specialités<br>
+    <div id="provs" >
+    {% for field in form.Specialite %}
+       <div class="provsli" style="display: inline-block; width: 180px;">
+         {{ form_widget(field) }}
+         {{ form_label(field) }}
+       </div>
+    {% endfor %}
+    </div>
+            </div>
+
         {{ form_end(form)}}
          <div class="col-lg-5 col-s1 " style="margin-top:32px">
-            <admin class="btn btn-success" id="ajout">
-            <i class="fas fa-plus" style="padding-right:5px;"></i> Ajouter
+            <a class="btn btn-success" id="ajout">
+            ajouter
+            </a>
+            <a class="btn btn-success" id="ajout" href="{{path('admin.module.edit')}}">
+            <i class="fas fa-plus" style="padding-right:5px;"></i> ajouter une specialite
             </a>
         </div>
     </div>
@@ -33,7 +51,6 @@
             <tr>
                 <th>#</th>
                 <th>Formation</th>
-                <th>Specialités</th>
                  <th>Action</th>
             </tr>
         </thead>
@@ -42,17 +59,9 @@
             {% for formation in formations %}
             <tr>
                 <td>{{ formation.id }}</td>
-                <td>{{ formation.name }}</td>
-                <td>
-               
-                {% for Specialite in formation.getSpecialites() %}
-                <span class=" badge badge-secondary" >{{Specialite.name}}</span>
-                            {% endfor %}
-                </td>
+                <td>{{ formation.name }}</td>               
                  <td><a href="{{ path('admin.formation.edit',{id: formation.id}) }}" class="btn btn-secondary"><i
                             class="fas fa-edit" style="padding-right:5px;"></i>Editer</a>
-                    <a href="{{ path('admin.formation_s.edit',{id: formation.id}) }}" class="btn btn-warning"><i
-                        class="fas fa-edit" style="padding-right:5px;"></i>Editer les Specialites</a>
                     <form method="post" action="{{ path('admin.formation.delete',{id: formation.id}) }}" style="display: inline-block"
                         onsubmit="return confirm('Etes vou vraiment sur ?')">
                         <input type="hidden" name="_method" value="DELETE">
@@ -67,7 +76,6 @@
     </table>
 
 </div>
-
 
 
 

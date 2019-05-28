@@ -7,6 +7,7 @@ use App\Entity\Module;
 use App\Form\SpecialiteType;
 use App\Form\ModuleType;
 use App\Repository\SpecialiteRepository;
+
 use App\Repository\ModuleRepository;
 
 use Symfony\Component\Security\Core\User\UserInterface\UserInterface;
@@ -25,12 +26,12 @@ class informationController extends AbstractController
     /**
      * @var SpecialiteRepository
      */
-    
     private $repository;
+
+
      /**
      * @var ModuleRepository
      */
-    
     private $r;
     /**
      * @var ObjectManager
@@ -58,10 +59,7 @@ class informationController extends AbstractController
             $form = $this->createForm(SpecialiteType::class, $specliate );
             $module_f = $this->createForm(ModuleType::class, $module);
             $specialites = $this->repository->findall();
-            foreach ($specialites as $spc) {
-                foreach ($spc->getModules() as $module) {
-        }
-    }
+
 
         return $this->render('Admin/option/index.html.twig', [
             'current' => 9,
@@ -106,13 +104,14 @@ class informationController extends AbstractController
     public function module_add_ajax(Request $request)
 {
         $module = new Module();
-        $specialite = $this->repository->find($request->request->get('id'));
+        $spc =$request->request->get('id');
+          $qb = $this->repository->findOneBySomeField($spc);
         $module->setNom($request->request->get('add'));
-        $module->setSpecialite($specialite);
+        $module->setSpecialite_id($qb->getId());
         $this->em->persist($module);
         $this->em->flush();
         $response = new Response(json_encode(array(
-        'message' => 'bien ajouter',
+        'message' => $qb,
     )));
     $response->headers->set('Content-Type', 'application/json');
 
@@ -168,12 +167,11 @@ $qb->getQuery()->execute();
 
     }
  /**
-     * @Route("/admin/specialite/{id}/module", name="admin.module.edit",methods="GET|POST")
-     * @param Specialite $specialite
+     * @Route("/admin/specialite_module", name="admin.formation.specialite.create",methods="GET|POST")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function edit_m(Specialite $specialite, Request $request)
+    public function newspecialite(Request $request)
     {
         $module = new Module();
         $module_f = $this->createForm(ModuleType::class, $module);
@@ -186,7 +184,34 @@ $qb->getQuery()->execute();
         }
 
         return $this->render('admin/option/edit_m.html.twig', [
+            'form_m' => $module_f->createView(),
+            'current' => 8
+
+        ]);
+
+    }
+
+     /**
+     * @Route("/admin/specialite/{id}/module", name="admin.module.edit",methods="GET|POST")
+     * @param Specialite $specialite
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function edit_module(Specialite $specialite, Request $request)
+    {
+        $module = new Module();
+        $module_f = $this->createForm(ModuleType::class, $module);
+        $modules_spcl = $this->r->findBy(array('specialite_id' => $specialite->getId()));
+        $module_f->handleRequest($request);
+        if ($module_f->isSubmitted() && $module_f->isValid()) {
+            $this->em->flush();
+            $this->addFlash('success', 'bien modifié avec succés');
+            return $this->redirectToRoute('specialite');
+        }
+        dump($modules_spcl);
+        return $this->render('admin/option/edit_module.html.twig', [
             'specialite' => $specialite,
+            'modules' => $modules_spcl,
             'form_m' => $module_f->createView(),
             'current' => 8
 

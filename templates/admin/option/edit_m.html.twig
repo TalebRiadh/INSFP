@@ -4,14 +4,20 @@
 
 <div class="container mt-4">
     <h2 style="margin-bottom:80px;">
-        <i class="fas fa-newspaper fa-2x" style="padding-right:5px;"></i>  <a href="{{ path('specialite')}}">Option</a>\Editer Les Modules 
+        <i class="fas fa-newspaper fa-2x" style="padding-right:5px;"></i>  <a href="{{ path('formation')}}">Gestion des Formations</a>\Creation d'une specialité
     </h2>           
-    <span class="id_spc" style="display:none;">{{ specialite.id}}</span>
-      {% for module in specialite.getModules() %}
-                <span id="module" class="bdg badge badge-secondary" style="display:none" >{{module.nom}}</span>
-                            {% endfor %}     
- {{ form_start(form_m) }}
-                        {{ form_row(form_m.nom) }}
-                {{ form_end(form_m)}}
+    <div id="alert" class="alert alert-success"  role="alert">
+  </div>
+    <div class="form-group">
+    <label for="exampleInputEmail1">Nom de specialite</label>
+    <input type="text" class="form-control" id="nomspecialite"  placeholder="Nom"><br>
+    <button id="btn_spcl" type="button" class="btn btn-primary">Créer</button>
+  </div>
+
+                <span id="module" class="bdg badge badge-secondary" style="display:none" ></span>
+                      {{ form_start(form_m) }}
+                                              {{ form_row(form_m.nom) }}
+                      {{ form_end(form_m)}}
 </div>
+
 {% endblock %}

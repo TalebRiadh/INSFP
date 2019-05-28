@@ -4,14 +4,23 @@
 
 <div class="container mt-4">
     <h2 style="margin-bottom:80px;">
-        <i class="fas fa-newspaper fa-2x" style="padding-right:5px;"></i>  editer une nouvelle 
+        <i class="fas fa-newspaper fa-2x" style="padding-right:5px;"></i>  editer l'evenement 
     </h2>         
+        {{ include ('admin/evenement/_form.html.twig',{button: 'Editer'}) }}
+</div>
+<div class="container">
+  <hr class="mt-2 mb-5">
+  <div class="row text-center text-lg-left">
     {% for result in results %}
         {% for image in result %}
-                    <img src="{{asset('news/pdf/')}}{{image}}" alt="test" style="width:550px ; height: 380px" />
-                    <br>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="{{asset('news/pdf/')}}{{image}}" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="{{asset('news/pdf/')}}{{image}}" alt="">
+                </a>
+            </div>
         {% endfor %}
-             <br>
     {% endfor %}
+            </div>
+
 </div>
 {% endblock %}

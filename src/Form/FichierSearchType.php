@@ -18,11 +18,9 @@ class FichierSearchType extends AbstractType
         $builder
             ->add('module',  EntityType::class, [
             'class' => Module::class,
-            'label' =>'Module',
             'choice_label' => 'nom'])
             ->add('specialite',  EntityType::class, [
             'class' => Specialite::class,
-            'label' =>'Specialité',
             'choice_label' => 'name']);
     }
 

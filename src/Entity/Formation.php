@@ -23,24 +23,12 @@ class Formation
      */
     private $name;
 
-/**
-     * @ORM\OneToMany(targetEntity="App\Entity\Specialite", mappedBy="Formation")
-     */
-    private $specialite;
-
 
     public function __construct()
     {
-        $this->specialite = new ArrayCollection();
     }
 
-    /**
-     * @return Collection|specialite[]
-     */
-    public function getSpecialites(): Collection
-    {
-         return $this->specialite;
-    }
+   
     /**
      * Get the value of id
      */ 
