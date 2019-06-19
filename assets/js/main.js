@@ -7,6 +7,8 @@ $(function () {
     $('#alert').hide()
     var spc_nom;
     //$("input[type^='checkbox']").first().hide();
+
+    /*------------- AJOUTER UNE SPECIALITE STATIQUE  ---------------*/
     $('#btn_spcl').click(function () {
         spc_nom = $('#nomspecialite').val()
 
@@ -19,14 +21,11 @@ $(function () {
             },
             async: true,
             success: function (data) {
-
                 $('#alert').append('<p>' + data.message + '</p>') /* location.reload(true);*/
                 $('#alert').show()
                 setTimeout(function () {
                     $("#alert").hide()
                 }, 2000);
-
-
             },
             error: function (xhr, textStatus, errorThrown) {
                 alert('Ajax request failed.');
@@ -34,23 +33,24 @@ $(function () {
         })
 
     })
+    /*----------------------------------------------------------------*/
+
 
     $("#submitButton").click(function () {
-
         var selected = [];
         $('input:checked').each(function () {
             selected.push($(this).val());
         });
         console.log(selected);
-
-
     });
 
-    /*--------------------ajax ---------------*/
+    /* AJOUTER UNE FORAMTION AVEC LES SPECIALITES SELECIONEES  */
     $('#ajout').click(function () {
+
         var spc = $("#formation_name").val()
         var selected = [];
-        $('input:checked').each(function () {
+        $('#formation_Specialite option:selected').each(function () {
+
             selected.push($(this).val());
         });
         selected.getValue
@@ -75,6 +75,7 @@ $(function () {
 
     });
     /*---------------------------------------------------*/
+
     $('.bdg').each(function (index) {
         $('#module_nom').tagsinput('add', $(this).text());
     });
@@ -82,6 +83,7 @@ $(function () {
     $("span[data-role='remove']").click(function () {
         console.log($(this).parent().text());
     })
+    /*---------------------- AJOUTER LES MODULES POUR LA SPECIALITE SELECTIONEE -----*/
     $('#module_nom').on('itemAdded', function (event) {
         console.log(event.item);
         $.ajax({
@@ -102,6 +104,9 @@ $(function () {
             }
         })
     });
+    /*------------------------------------------------------------------------------*/
+
+    /*-------------------- SUPPRIMER LE MODULE -----------------*/
     $('#module_nom').on('itemRemoved', function (event) {
         $.ajax({
             url: "/admin/specialite/module_delete_ajax",
@@ -120,8 +125,58 @@ $(function () {
             }
         })
     });
+    /*-------------------------------------------------*/
+    $('.delete').each(function () {
+        $(this).on('click', function () {
+            var specialite_formation_selected = $(this).siblings().html()
+            console.log(specialite_formation_selected)
+            $.ajax({
+                url: "/admin/specialite_formation_delete",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "specialite": specialite_formation_selected,
+                },
+                async: true,
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('Ajax request failed.');
+                }
+            })
+        })
+    })
+
+    $('#ajouter_specialite_edit').click(function () {
+
+        var formation_id = $("#formation_id").html()
+        var selected = [];
+        $('#formation_Specialite option:selected').each(function () {
+
+            selected.push($(this).val());
+        });
+        selected.getValue
+        $.ajax({
+            url: "/admin/specialite_formation_add",
+            type: "POST",
+            dataType: "json",
+            data: {
+                "formation_id": formation_id,
+                "specialite_formation": selected,
+            },
+            async: true,
+            success: function (data) {
+                location.reload(true);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Ajax request failed.');
+            }
+        })
+
+    });
     /*-----------------------------------------------*/
-    $('.bdg').each(function (index) {
+    /*$('.bdg').each(function (index) {
         $('#specialite_name').tagsinput('add', $(this).text());
     });
     var id_spc = $(".id_spc").text()
@@ -166,7 +221,8 @@ $(function () {
                 alert('Ajax request failed.');
             }
         })
-    });
+    });*/
+
     $('#hide').hide();
     $('#button-add').click(function () {
         $('#hide').slideToggle();

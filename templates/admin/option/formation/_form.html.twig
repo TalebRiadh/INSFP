@@ -1,7 +1,29 @@
 <div class="container mt-15">
+            <span id="formation_id"  style="display: none">{{formation.id }}</span>  
             {{ form_start(form)}}
         {{ form_row(form.name) }}
+         <div class="row">
+    <div class="col">
+            <ul>
+            <label><b>Specialites Selectionées:</b></label>
+            {% for specialite in specialites %}
+            <li class="mb-2">
+            <span  style="display: none">{{specialite.id }}</span>  
+            <span>{{specialite.name }}</span>  
+            <a id="delete_specialite_formation" class=" delete btn btn-danger">Supprimer</a>
+            </li>
+             {% endfor %}
+        </ul>    
+    </div>
+    
+    <div class="col">
+                {{ form_row(form.Specialite) }}<br>
+                 <a id="ajouter_specialite_edit" class=" add btn btn-success">Ajouter</a>
+        </div>
+  </div>
+   
         {{ form_rest(form) }}
         <button class="btn btn-primary"><i class="fas fa-upload" style="padding-right:10px;"></i>{{ button|default('Enregistrer') }}</button>
         {{ form_end(form) }}
+
     </div>

@@ -10,8 +10,6 @@ use App\Form\FormationType;
 use App\Repository\SpecialiteRepository;
 use App\Repository\FormationRepository;
 use App\Repository\SpecialiteFormationRepository;
-
-
 use Symfony\Component\Security\Core\User\UserInterface\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,14 +27,13 @@ class FormationController extends AbstractController
     /**
      * @var FormationRepository
      */
-    
     private $repository;
      /**
      * @var SpecialiteRepository
      */
     private $r;
 
-         /**
+    /**
      * @var SpecialiteFormationRepository
      */
     private $rep;
@@ -105,7 +102,7 @@ class FormationController extends AbstractController
 }
         
         $response = new Response(json_encode(array(
-        'formation' => $v
+        'specialité' => $array
     )));
     $response->headers->set('Content-Type', 'application/json');
 
@@ -156,14 +153,19 @@ class FormationController extends AbstractController
 
     /**
      * @Route("/admin/formation/{id}", name="admin.formation.edit",methods="GET|POST")
-     * @param Formation $Formation
+     * @param Formation $formation
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function edit(Formation $Formation, Request $request)
+    public function edit(Formation $formation, Request $request)
     {
-        $form = $this->createForm(FormationType::class, $Formation);
-        $formation = new Formation();
+        $form = $this->createForm(FormationType::class, $formation);
+        $id_specialites_formation = $this->rep->findByExampleField($formation->getId());
+        $specialites = [];
+
+        foreach($id_specialites_formation as $id_specialite_formation){
+            $specialites[] = $this->r->find($id_specialite_formation->getId_specialite());
+        }
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -171,11 +173,11 @@ class FormationController extends AbstractController
             $this->addFlash('success', 'bien modifié avec succés');
             return $this->redirectToRoute('formation');
         }
-        dump($form->createView());
         return $this->render('admin/option/formation/edit.html.twig', [
             'formation' => $formation,
             'form' => $form->createView(),
-            'current' => 8
+            'current' => 8,
+            'specialites' => $specialites
 
         ]);
 
@@ -254,6 +256,73 @@ class FormationController extends AbstractController
         }
         return $this->redirectToRoute('formation');
     }
+
+
+    /**
+     * @Route("/admin/specialite_formation_delete",name="specialite_formation_delete",options={"expose"=true})
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
+     */
+    public function specialite_formation_delete(Request $request)
+{
+            $specialite=$request->request->get('specialite');
+             $qb = $this->em->createQueryBuilder();
+            $qb->delete('App\Entity\SpecialiteFormation', 'md');
+            $qb->where('md.id_specialite = :specliate');
+            $qb->setParameter(':specliate', $specialite);
+            $qb->getQuery()->execute();
+        $response = new Response(json_encode(array(
+        'message' => 'deleted',
+    )));
+    $response->headers->set('Content-Type', 'application/json');
+
+    return $response;
+}
+
+
+    /**
+     * @Route("/admin/specialite_formation_add",name="specialite_formation_add",options={"expose"=true})
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
+     */
+    public function specialite_formation_add(Request $request)
+{
+        $formation_id = $request->request->get('formation_id');    
+
+            $connection = $this->em->getConnection();
+            $statement = $connection->prepare("SELECT id_specialite
+            FROM specialite_formation as s
+            WHERE s.id_formation =:id");
+            $statement->bindValue('id',$formation_id);
+            $statement->execute();
+            $results = $statement->fetchAll();  
+            $reload = false;
+            /*$test= [];
+                    foreach ($results as $result) {
+                    $test[]= $result['id_specialite'];
+                                                }*/
+        $array = $request->request->get('specialite_formation');
+        foreach ($array as $k => $v) { 
+                       /*foreach ($test as $t => $a) { 
+                            if($a === $v){
+
+                            }
+                            else {*/
+                    $formation_specialite = new SpecialiteFormation();
+                    $formation_specialite->setId_formation($formation_id);
+                    $formation_specialite->setId_specialite($v);
+                    $this->em->persist($formation_specialite);
+                    $this->em->flush();
+        //}
+                                    }
+                                            
+
+        $response = new Response(json_encode(array(
+    )));
+    $response->headers->set('Content-Type', 'application/json');
+
+    return $response;
+}
 
 
 }

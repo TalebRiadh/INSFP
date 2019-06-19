@@ -19,26 +19,16 @@
             {{ form_row(form.name) }}
         </div>
         <br>
-    <div class=" col-lg-2 col-s2 mr-2 form-check ">
-        {{ form_label(form.Specialite) }}
+    <div class=" col-lg-2 col-s2 mr-2 ">
+        {{ form_row(form.Specialite) }}
     <br>
-    <input type="checkbox" class="selectAllCheckboxes">Specialités<br>
-    <div id="provs" >
-    {% for field in form.Specialite %}
-       <div class="provsli" style="display: inline-block; width: 180px;">
-         {{ form_widget(field) }}
-         {{ form_label(field) }}
-       </div>
-    {% endfor %}
-    </div>
-            </div>
-
+     </div>
         {{ form_end(form)}}
          <div class="col-lg-5 col-s1 " style="margin-top:32px">
             <a class="btn btn-success" id="ajout">
             ajouter
             </a>
-            <a class="btn btn-success" id="ajout" href="{{path('admin.module.edit')}}">
+            <a class="btn btn-success" id="ajout" href="{{path('admin.formation.specialite.create')}}">
             <i class="fas fa-plus" style="padding-right:5px;"></i> ajouter une specialite
             </a>
         </div>
@@ -59,7 +49,9 @@
             {% for formation in formations %}
             <tr>
                 <td>{{ formation.id }}</td>
-                <td>{{ formation.name }}</td>               
+                <td>{{ formation.name }}</td>    
+                                <td>{{ dump(formation) }}</td>               
+           
                  <td><a href="{{ path('admin.formation.edit',{id: formation.id}) }}" class="btn btn-secondary"><i
                             class="fas fa-edit" style="padding-right:5px;"></i>Editer</a>
                     <form method="post" action="{{ path('admin.formation.delete',{id: formation.id}) }}" style="display: inline-block"

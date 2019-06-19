@@ -28,7 +28,6 @@ class FormationType extends AbstractType
             'required' => false,
             'multiple' => true,
             'mapped' => false,
-            'expanded' => true
         ))
         ;
     }

@@ -22,19 +22,17 @@ class SpecialiteRepository extends ServiceEntityRepository
     // /**
     //  * @return Specialite[] Returns an array of Specialite objects
     //  */
-    /*
+    
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
+            ->andWhere('s.id = :val')
             ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     
     public function findOneBySomeField($value): ?Specialite
