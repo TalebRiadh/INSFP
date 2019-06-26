@@ -6,15 +6,10 @@
 
     <title>{% block title %}{% endblock %}</title>
                 <link href=" {{asset('css/tagsinput.css')}}" rel="stylesheet"/>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+                <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet"/>
+                <link href="{{asset('css/fontawesome.min.css')}}" rel="stylesheet" />
     {% block stylesheets %}
-    <link rel="stylesheet" href="{{asset('build/js/app.css')}}">
+                <link rel="stylesheet" href="{{asset('build/js/app.css')}}">
     {% endblock %}
 </head>
 
@@ -58,16 +53,16 @@
             {% block body %}{% endblock %}
         </div>
     </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="{{asset('js/jquery-3.2.1.min.js')}}"> </script>
             <script src="{{asset('js/tagsinput.js')}}"></script>
+            <script src="{{asset('js/bootstrap.min.js')}}"></script>
+            <script src="{{asset('js/popper.min.js')}}"></script>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
     {% block javascripts %}
     {{ encore_entry_script_tags('js/main') }}
-  
+    <script src="{{asset('js/list.min.js')}}"></script>
+    <script src="{{asset('js/fontawesome.min.js')}}"></script>
+
     <script lang="javascript" type="text/javascript">
         var $collectionHolder;
         // setup an "add a tag" link

@@ -77,7 +77,9 @@ class NewsRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('p');
             $query = $query->andwhere(' p.type=:type')
-            ->setParameter('type', "evenement");
+            ->setParameter('type', "evenement")
+            ->orderBy('p.id', 'DESC');
+;
         
         return $query->getQuery();
     }
@@ -89,7 +91,10 @@ class NewsRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('p');
             $query = $query->andwhere(' p.type=:type')
-            ->setParameter('type', "nouvelle");
+
+            ->setParameter('type', "nouvelle")       
+            ->orderBy('p.id', 'DESC');
+
         
         return $query->getQuery();
     }

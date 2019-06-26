@@ -1,84 +1,66 @@
-{% extends 'admin/dashboard.html.twig' %}
-
-{% block title 'Gerer les membres' %}
-{% block body %}
-<div class="  row " >
+{% extends 'admin/dashboard.html.twig' %} {% block title 'Gerer les membres' %} {% block body %}
+<div class="row">
     <div class="col-md-4">
         <h1 class="center-align  "><i class="fas fa-users-cog"></i> Gérer les Membres </h1>
     </div>
-     {% for message in app.flashes('success') %}
-    <div class="alert alert-success"id="successMessage">{{ message }}</div>
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success" id="successMessage">{{ message }}</div>
     {% endfor %}
-    <div class="col-md-7 offset-md-7" style="margin-top:-40px; margin-bottom:25px;">
-        {{ form_start(form) }}
-        <div class="row ">
-            <div class="col-m3 col-s8 mr-2">
-                {{ form_row(form.nom) }}
+</div>
+<div id="users">
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label>
+                    <br>
+                </label>
+                <input class="search form-control" placeholder="Recherche" />
             </div>
-            <div class="col-m3 col-s8 mr-2">
-                {{ form_row(form.tel_num) }}
-            </div>
-            <div class="col-m2 col-s8 ">
-                <button class=" btn btn-success">
-                    <i class="fas fa-search" style="padding-right:5px;"></i> Rechercher
-                </button>
-            </div>
-            {{ form_end(form)}}
+        </div>
+    </div>
+    <div class=" co_table">
+        <table class="table table-striped" id="table_id" class="display">
+
+            <thead>
+                <tr>
+                    <th><i class="sort fas fa-sort-numeric-down" data-sort="code" id="code"></i> #</th>
+                    <th ><i class="sort fas fa-sort-numeric-down" data-sort="code" id="name"></i>Nom</th>
+                    <th><i class="sort fas fa-sort-numeric-down" data-sort="code" id="category"></i> Prenom</th>
+                    <th><i class="sort fas fa-sort-numeric-down" data-sort="code" id="price"></i> Email</th>
+                    <th>Numero du telephone</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                {% for user in user %}
+                <tr scope="row">
+                    <td class="code">{{ user.id }}</td>
+                    <td class="name">{{ user.nom }}</td>
+                    <td class="category">{{ user.prenom }}</td>
+                    <td class="price">{{ user.email }}</td>
+                    <td >{{ user.getTelNum }}</td>
+                    <td >{% if user.role == 0 %} Admin {% elseif user.role == 1 %} Enseignant {% else %} Moderateur {% endif %}</td>
+
+                    <td>
+                        <a href="{{ path('admin.user.edit',{id: user.id}) }}" class="btn btn-info"><i class="fas fa-edit"
+                            style="padding-right:5px;"></i>
+                        Editer</a>
+                        <form method="post" action="{{ path('admin.user.delete',{id: user.id}) }}" style="display: inline-block" onsubmit="return confirm('Etes vou vraiment sur ?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete'~user.id) }}">
+                            <button class="btn btn-danger"><i class="fas fa-trash-alt" style="padding-right:5px;"></i> Supprimer
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation center-cols center-align">
+            {{ knp_pagination_render(user) }}
         </div>
     </div>
 </div>
-<div class=" co_table">
-    <table class="table table-striped" id="table_id" class="display" >
-
-        <thead>
-            <tr>
-                <th>#</th>
-                <th >Nom</th>
-                <th >Prenom</th>
-                <th>Email</th>
-                <th>Numero du telephone</th>
-                <th >Role</th>
-                <th >Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in user %}
-            <tr scope="row">
-                            <td>{{ user.id }}</td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.prenom }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.getTelNum }}</td>
-                <td>{% if user.role == 0 %}
-                    Admin
-                    {% elseif user.role == 1 %}
-                    Enseignant
-                    {% else %}
-                    Moderateur
-                    {% endif %}</td>
-
-                <td>
-                    <a href="{{ path('admin.user.edit',{id: user.id}) }}" class="btn btn-info"><i class="fas fa-edit"
-                            style="padding-right:5px;"></i>
-                        Editer</a>
-                    <form method="post" action="{{ path('admin.user.delete',{id: user.id}) }}" style="display: inline-block"
-                        onsubmit="return confirm('Etes vou vraiment sur ?')">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete'~user.id) }}">
-                        <button class="btn btn-danger"><i class="fas fa-trash-alt" style="padding-right:5px;"></i>
-                            Supprimer</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <div class="navigation center-cols center-align">
-        {{ knp_pagination_render(user) }}
-    </div>
-</div>
-
-
-
 
 {% endblock body %}

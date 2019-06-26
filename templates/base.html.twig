@@ -10,8 +10,7 @@
         <link href="img/favicon.png" rel="icon" type=" {{asset('image/png')}}"/>
         <title>INSFP</title>
         <link
-            crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" rel="stylesheet">
-            <!-- Bootstrap CSS -->
+            href="{{asset('css/fontawesome.css')}}" rel="stylesheet" />
             <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet"/>
             <link href=" {{asset('css/flaticon.css')}}" rel="stylesheet"/>
             <link href="{{asset('css/themify-icons.css')}}" rel="stylesheet"/>
@@ -74,19 +73,13 @@
             <script src="{{asset('vendors/owl-carousel/owl.carousel.min.js')}}"></script>
             <script src="{{asset('js/owl-carousel-thumb.min.js')}}"></script>
             <script src="{{asset('js/jquery.ajaxchimp.min.js')}}"></script>
-            <script src="{{asset('js/mail-script.js')}}"></script>
             <!--gmaps Js-->
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-            <script src="{{asset('js/gmaps.min.js')}}"></script>
-            <script src="{{asset('js/theme.js')}}"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
+            <script src="{{asset('js/jquery-3.2.1.slim.min.js')}}"></script>
+            <script src="{{asset('js/bootstrap.min.js')}}"></script>    
+            <script src="{{asset('js/popper.min.js')}}"></script>
 
     {% block javascripts %}
-    {{ encore_entry_script_tags('js/main') }}
+            {{ encore_entry_script_tags('js/main') }}
   
     {% endblock %}
 </body>

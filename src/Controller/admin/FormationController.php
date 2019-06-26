@@ -84,25 +84,28 @@ class FormationController extends AbstractController
      * @return Response
      */
     public function ajaxAction(Request $request)
-{
-        // createion dune formation dans la table formation
-        $formation = new Formation();
-        $spc = $request->request->get('spc');
-        $formation->setName($spc);
-        $this->em->persist($formation);
-        $this->em->flush();
-
+{       $message = 0;
         $array = $request->request->get('specialite_formation');
-        foreach ($array as $k => $v) {
-        $formation_specialite = new SpecialiteFormation();
-        $formation_specialite->setId_formation($formation->getId());
-        $formation_specialite->setId_specialite($v);
-        $this->em->persist($formation_specialite);
-        $this->em->flush();
-}
+        if($array !== null){
+            $message =1;
+            $formation = new Formation();
+            $spc = $request->request->get('spc');
+            $disc = $request->request->get('disc');
+            $formation->setName($spc);
+            $formation->setDiscription($disc);
+            $this->em->persist($formation);
+            $this->em->flush();
+            foreach ($array as $k => $v) {
+            $formation_specialite = new SpecialiteFormation();
+            $formation_specialite->setId_formation($formation->getId());
+            $formation_specialite->setId_specialite($v);
+            $this->em->persist($formation_specialite);
+            $this->em->flush();
+            }
+        }
         
         $response = new Response(json_encode(array(
-        'specialité' => $array
+        'message' => $message
     )));
     $response->headers->set('Content-Type', 'application/json');
 
@@ -296,13 +299,15 @@ class FormationController extends AbstractController
             $statement->bindValue('id',$formation_id);
             $statement->execute();
             $results = $statement->fetchAll();  
-            $reload = false;
+            $message = '';
+
             /*$test= [];
                     foreach ($results as $result) {
                     $test[]= $result['id_specialite'];
                                                 }*/
         $array = $request->request->get('specialite_formation');
-        foreach ($array as $k => $v) { 
+        
+            foreach ($array as $k => $v) { 
                        /*foreach ($test as $t => $a) { 
                             if($a === $v){
 
@@ -315,7 +320,7 @@ class FormationController extends AbstractController
                     $this->em->flush();
         //}
                                     }
-                                            
+                                        
 
         $response = new Response(json_encode(array(
     )));

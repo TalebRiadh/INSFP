@@ -48,6 +48,12 @@ class User implements UserInterface, \Serializable
 }
     /**
      * @ORM\Column(type="string", length=255)
+     *  
+     * @Assert\Regex(
+     *     pattern="/^(00213|\+213|0)(5|6|7)[0-9]{8}$/",
+     *     match=true,
+     *     message="Ton Numéro n'est pas valide"
+     * )
      */
     private $tel_num;
 

@@ -18,6 +18,9 @@
         <div class=" col-lg-2 col-s2 mr-2 ">
             {{ form_row(form.name) }}
         </div>
+        <div class=" col-lg-2 col-s2 mr-2 ">
+            {{ form_row(form.discription) }}
+        </div>
         <br>
     <div class=" col-lg-2 col-s2 mr-2 ">
         {{ form_row(form.Specialite) }}
@@ -35,7 +38,7 @@
     </div>
 </div>
 
-<div class="container-fluid ">
+<div class="container">
     <table class="table table-striped" id="table">
         <thead>
             <tr>
@@ -49,9 +52,7 @@
             {% for formation in formations %}
             <tr>
                 <td>{{ formation.id }}</td>
-                <td>{{ formation.name }}</td>    
-                                <td>{{ dump(formation) }}</td>               
-           
+                <td>{{ formation.name }}</td>               
                  <td><a href="{{ path('admin.formation.edit',{id: formation.id}) }}" class="btn btn-secondary"><i
                             class="fas fa-edit" style="padding-right:5px;"></i>Editer</a>
                     <form method="post" action="{{ path('admin.formation.delete',{id: formation.id}) }}" style="display: inline-block"

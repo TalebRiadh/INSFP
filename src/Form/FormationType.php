@@ -20,6 +20,8 @@ class FormationType extends AbstractType
                    'label' => 'Formation',
                    
                ))
+                ->add('discription')
+
                 ->add('Specialite', EntityType::class, array(
             'label' => 'Specialite',
             'required' => true,

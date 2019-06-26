@@ -2,21 +2,24 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Twig\Environment;
-use App\Repository\NewsRepository;
-use App\Repository\FichierRepository;
-use App\Entity\FichierSearch;
-use Symfony\Component\HttpFoundation\Response;
-use Doctrine\Common\Persistence\ObjectManager;
-use App\Entity\Fichier;
 use App\Entity\News;
+use Twig\Environment;
+use App\Entity\Fichier;
 use App\Entity\Message;
 use App\Form\MessageType;
+use App\Entity\FichierSearch;
+use App\Form\FichierSearchType;
+use App\Repository\NewsRepository;
+use App\Repository\ModuleRepository;
+use App\Repository\FichierRepository;
+use App\Repository\FormationRepository;
+use App\Repository\SpecialiteRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\FichierSearchType;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -27,6 +30,22 @@ class HomeController extends AbstractController
     private $repository;
 
      /**
+     * @var FormationRepository
+     */
+    private $forma;
+
+    /**
+     * @var SpecialiteRepository
+     */
+    private $special;
+
+    /**
+     * @var ModuleRepository
+     */
+    private $module;
+
+
+     /**
      * @var FichierRepository
      */
     private $r;
@@ -35,8 +54,11 @@ class HomeController extends AbstractController
      */
     private $em;
 
-    public function __construct(FichierRepository $r,NewsRepository $repository,ObjectManager $em)
+    public function __construct(ModuleRepository $module,SpecialiteRepository $special,FormationRepository $forma,FichierRepository $r,NewsRepository $repository,ObjectManager $em)
     {
+        $this->module = $module;
+        $this->special = $special;
+        $this->forma = $forma;
         $this->repository = $repository;
         $this->r = $r;
         $this->em = $em;
@@ -50,8 +72,16 @@ class HomeController extends AbstractController
         $events = $this->repository->findlastesevents();
         $news = $this->repository->findlastesnews();
         $fichier = $this->r->findlastesfichier();
-
+        $modules = $this->module->findAll();
+        $formations = $this->forma->findAll();
+        $specialites = $this->special->findAll();
+        $countspecialite = count($specialites);
+        dump($news);
         return $this->render('home/index.html.twig', [
+            'modules' => $modules,
+            'countSpc'=> $countspecialite,
+            'specialites' =>$specialites,
+            'formations' =>$formations,
             'events'=>$events,
             'news'=>$news,
             'fichiers'=>$fichier

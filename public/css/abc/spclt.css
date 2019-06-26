@@ -1,0 +1,127 @@
+
+
+
+
+
+.mt-100 {
+  margin-top: 100px; }
+  @media (max-width: 991px) {
+    .mt-100 {
+      margin-top: 0px; } }
+
+.mt--100 {
+  margin-top: -100px; }
+  @media (max-width: 991px) {
+    .mt--100 {
+      margin-top: 0px; } }
+
+/*---------------------------------------------------- */
+
+/* End Main Title Area css
+============================================================================================ */
+/* Start Gradient Area css
+============================================================================================ */
+.gradient-bg, #search_input_box, .header-top .header-top-right a:hover, .single_feature:nth-child(3), .single_department:hover, .single_course .course_content .course_meta .price, .testimonial_area .owl-thumb-item.active .overlay-grad, .testimonial_area .owl-thumb-item .overlay-grad:hover, .testimonial_area .owl-thumb-item .overlay-grad.active, .registration_area, .categories_post:hover .categories_details, .blog_right_sidebar .widget_title, .blog_right_sidebar .search_widget .input-group .form-control, .blog_right_sidebar .newsletter_widget .bbtns, .blog_right_sidebar .tag_cloud_widget ul li a:hover, .blog-pagination .page-item.active .page-link, .blog-pagination .page-link:hover, .comments-area .btn-reply:hover, .blog_btn:hover, .footer-area .footer-bottom .footer-social a:hover {
+  background: -webkit-linear-gradient(90deg, #00aee0 0%, #00fedc 100%);
+  background: -moz-linear-gradient(90deg, #00aee0 0%, #00fedc 100%);
+  background: -ms-linear-gradient(90deg, #00aee0 0%, #00fedc 100%);
+  background: -o-linear-gradient(90deg, #00aee0 0%, #00fedc 100%);
+  background: linear-gradient(90deg, #00aee0 0%, #00fedc 100%); }
+
+.gradient-bg2, .single_feature:nth-child(1), .single_course .course_content .course_meta .price.df_color1 {
+  background: -webkit-linear-gradient(90deg, #e94086 0%, #e5925a 100%);
+  background: -moz-linear-gradient(90deg, #e94086 0%, #e5925a 100%);
+  background: -ms-linear-gradient(90deg, #e94086 0%, #e5925a 100%);
+  background: -o-linear-gradient(90deg, #e94086 0%, #e5925a 100%);
+  background: linear-gradient(90deg, #e94086 0%, #e5925a 100%); }
+
+.gradient-bg3, .single_feature:nth-child(2), .single_course .course_content .course_meta .price.df_color2 {
+  background: -webkit-linear-gradient(90deg, #7349cc 0%, #e163e4 100%);
+  background: -moz-linear-gradient(90deg, #7349cc 0%, #e163e4 100%);
+  background: -ms-linear-gradient(90deg, #7349cc 0%, #e163e4 100%);
+  background: -o-linear-gradient(90deg, #7349cc 0%, #e163e4 100%);
+  background: linear-gradient(90deg, #7349cc 0%, #e163e4 100%); }
+
+.gradient-color, .blog_details h2:hover {
+  background: -webkit-linear-gradient(90deg, #00aee0 0%, #00fedc 100%);
+  background: -moz-linear-gradient(90deg, #00aee0 0%, #00fedc 100%);
+  background: -ms-linear-gradient(90deg, #00aee0 0%, #00fedc 100%);
+  background: -o-linear-gradient(90deg, #00aee0 0%, #00fedc 100%);
+  background: linear-gradient(90deg, #00aee0 0%, #00fedc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; }
+
+/* End Gradient Area css
+============================================================================================ */
+/* Start Buttons Area css
+============================================================================================ */
+
+/* Start Department Area css
+============================================================================================ */
+.single_department {
+  background: #f9f9f9;
+  padding: 40px 30px;
+  margin-bottom: 30px;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  box-shadow: 0px 10px 20px #14bdee6e; }
+  .single_department img {
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s; }
+  .single_department h4 {
+    font-family: Gravitas none;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 0;
+    color: #000000;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s; }
+  .single_department:hover {
+    box-shadow: 0px 20px 50px rgba(0, 175, 224, 0.3); }
+    .single_department:hover img {
+      -webkit-filter: brightness(0) invert(1);
+      -moz-filter: brightness(0) invert(1);
+      -ms-filter: brightness(0) invert(1);
+      -o-filter: brightness(0) invert(1);
+      filter: brightness(0) invert(1); }
+    .single_department:hover h4 {
+      color: #ffffff; }
+
+.dpmt_right h1 {
+  /*margin-top: -55%;*/
+  font-family: Gravitas none;
+  font-size: 42px;
+  margin-bottom: 25px; }
+  @media (max-width: 575px) {
+    .dpmt_right h1 {
+      font-size: 30px;
+      margin-bottom: 15px; } }
+.dpmt_right .primary-btn {
+  margin-top: 30px; }
+
+
+.dpmt_righte h1 {
+  font-family: Gravitas none;
+  font-size: 42px;
+  margin-bottom: 25px; }
+  @media (max-width: 575px) {
+    .dpmt_righte h1 {
+      font-size: 30px;
+      margin-bottom: 15px; } }
+.dpmt_righte .primary-btn {
+  margin-top: 30px; }  
+
+/* End Department Area css
+============================================================================================ */
+  
+
+/* End Main Button Area css
+============================================================================================ */
+/*---------------------------------------------------- */
+

@@ -5,9 +5,11 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FormationRepository")
+ * @UniqueEntity("name")
  */
 class Formation
 {
@@ -19,9 +21,18 @@ class Formation
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="name",type="string", unique=true)
      */
     private $name;
+
+
+
+    /**
+     *
+     * @ORM\Column(name="discription", type="string")
+     */
+    private $discription;
+
 
 
     public function __construct()
@@ -71,4 +82,26 @@ class Formation
     public function __toString() {
     return $this->name;
 }
+
+    
+
+    /**
+     * Get the value of discription
+     */ 
+    public function getDiscription()
+    {
+        return $this->discription;
+    }
+
+    /**
+     * Set the value of discription
+     *
+     * @return  self
+     */ 
+    public function setDiscription($discription)
+    {
+        $this->discription = $discription;
+
+        return $this;
+    }
 }

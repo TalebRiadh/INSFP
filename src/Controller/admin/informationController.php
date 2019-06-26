@@ -213,7 +213,7 @@ $qb->getQuery()->execute();
             'specialite' => $specialite,
             'modules' => $modules_spcl,
             'form_m' => $module_f->createView(),
-            'current' => 8
+            'current' => 9
 
         ]);
 

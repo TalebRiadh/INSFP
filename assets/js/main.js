@@ -4,6 +4,11 @@ require('../css/app.css');
 
 
 $(function () {
+    var options = {
+        valueNames: ['name', 'category', 'price', 'code', 'date']
+    };
+    var hackerList = new List('users', options);
+
     $('#alert').hide()
     var spc_nom;
     //$("input[type^='checkbox']").first().hide();
@@ -48,6 +53,7 @@ $(function () {
     $('#ajout').click(function () {
 
         var spc = $("#formation_name").val()
+        var disc = $("#formation_discription").val()
         var selected = [];
         $('#formation_Specialite option:selected').each(function () {
 
@@ -60,12 +66,16 @@ $(function () {
             dataType: "json",
             data: {
                 "spc": spc,
+                "disc": disc,
                 "specialite_formation": selected,
             },
             async: true,
             success: function (data) {
-                console.log(data)
-                location.reload(true);
+                if (data.message === 1) {
+                    location.reload(true);
+                } else {
+                    window.alert("faut avoir des specialites sur cette formation")
+                }
 
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -86,13 +96,15 @@ $(function () {
     /*---------------------- AJOUTER LES MODULES POUR LA SPECIALITE SELECTIONEE -----*/
     $('#module_nom').on('itemAdded', function (event) {
         console.log(event.item);
+        console.log($('#nomspecialite').html());
+
         $.ajax({
             url: "/admin/specialite/module_add_ajax",
             type: "POST",
             dataType: "json",
             data: {
                 "add": event.item,
-                "id": $('#nomspecialite').val()
+                "id": $('#nomspecialite').html()
             },
             async: true,
             success: function (data) {
@@ -167,7 +179,11 @@ $(function () {
             },
             async: true,
             success: function (data) {
-                location.reload(true);
+                if (data.message == null) {
+                    location.reload(true);
+                } else {
+                    window.alert(data.message)
+                }
             },
             error: function (xhr, textStatus, errorThrown) {
                 alert('Ajax request failed.');
